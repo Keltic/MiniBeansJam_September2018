@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: MiniBeansJam_September2018
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 3a4f65f270a5c3e4d952dc45d90a4436, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
