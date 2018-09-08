@@ -126,7 +126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4776888649435334, guid: 76fe7aa72a8c7f44ba964c9187eb0c13, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 385
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4776888649435334, guid: 76fe7aa72a8c7f44ba964c9187eb0c13, type: 2}
       propertyPath: m_LocalPosition.z
@@ -151,20 +151,6 @@ Prefab:
     - target: {fileID: 4776888649435334, guid: 76fe7aa72a8c7f44ba964c9187eb0c13, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776888649435334, guid: 76fe7aa72a8c7f44ba964c9187eb0c13, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 20264653097923230, guid: 76fe7aa72a8c7f44ba964c9187eb0c13,
-        type: 2}
-      propertyPath: orthographic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20264653097923230, guid: 76fe7aa72a8c7f44ba964c9187eb0c13,
-        type: 2}
-      propertyPath: orthographic size
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76fe7aa72a8c7f44ba964c9187eb0c13, type: 2}
@@ -264,6 +250,11 @@ Prefab:
     - target: {fileID: 224696986361325740, guid: 2950515e1be22e3449d192da19240732,
         type: 2}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224695612649924576, guid: 2950515e1be22e3449d192da19240732,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
