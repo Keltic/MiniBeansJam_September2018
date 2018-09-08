@@ -656,6 +656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4022030344786028}
+  - component: {fileID: 208255880009901176}
   m_Layer: 0
   m_Name: Fence_left_100
   m_TagString: Untagged
@@ -3184,6 +3185,21 @@ Transform:
   m_Father: {fileID: 4341568970710052}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!208 &208255880009901176
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404857226928656}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!212 &212016247593835374
 SpriteRenderer:
   m_ObjectHideFlags: 1
