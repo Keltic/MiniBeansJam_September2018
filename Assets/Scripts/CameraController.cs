@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
 
     public void Scroll(Vector3 force)
     {
-        this.rb.AddForce(force * -this.scrollForce, ForceMode.Impulse);
+        this.rb.AddForce(force * (-this.scrollForce * (this.currentZoomValue / this.maximumZoomValue)), ForceMode.Impulse);
     }
 
     public void Zoom(float value)

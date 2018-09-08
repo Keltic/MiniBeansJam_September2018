@@ -26,6 +26,7 @@ public class SpawnController : MonoBehaviour
         {
             temp = GameObject.Instantiate(this.npcPrefab);
             temp.transform.position = new Vector3(UnityEngine.Random.Range(rightBorder, leftBorder), 0.0f, UnityEngine.Random.Range(bottomBorder, topBorder));
+            EventController.ReportNpcSpawned();
         }
     }
 
