@@ -82,6 +82,7 @@ public class AIComponent : MonoBehaviour {
         Agent.autoBraking = false;
 	}
 
+    
     public float GetAttackRange()
     {
         switch (WeaponType)
@@ -95,6 +96,7 @@ public class AIComponent : MonoBehaviour {
         }
         return -1f;
     }
+    
 
     void UpdateMaterial()
     {
@@ -155,6 +157,12 @@ public class AIComponent : MonoBehaviour {
             }
         }
         return closestEntity;
+    }
+
+    public void ChangeWeaponType(WeaponTypes newType)
+    {
+        WeaponType = newType;
+        // TODO: Change animator
     }
 
     public void Infect()
