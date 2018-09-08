@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 224007627722495612}
   - component: {fileID: 222749728878588670}
   - component: {fileID: 114465793999774716}
+  - component: {fileID: 95899419788621174}
   m_Layer: 5
   m_Name: PlayerAlert
   m_TagString: Untagged
@@ -306,6 +307,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95899419788621174
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1673229114113198}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 026ace8e7cce87b489461aa35dd0d2b3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114000487726772580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -590,6 +609,8 @@ MonoBehaviour:
   textValueNpcCount: {fileID: 114423964324445422}
   textValueZombieCount: {fileID: 114009727981278628}
   textValuePoints: {fileID: 114749344303620286}
+  textPlayerAlert: {fileID: 114465793999774716}
+  animatorPlayerAlert: {fileID: 95899419788621174}
 --- !u!114 &114348490810514080
 MonoBehaviour:
   m_ObjectHideFlags: 1
