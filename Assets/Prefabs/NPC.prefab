@@ -21,8 +21,10 @@ GameObject:
   - component: {fileID: 4759026212144926}
   - component: {fileID: 195962873664721374}
   - component: {fileID: 114685566031350562}
+  - component: {fileID: 114593084048938300}
+  - component: {fileID: 65436004131837968}
   m_Layer: 0
-  m_Name: Zombie
+  m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +40,6 @@ GameObject:
   - component: {fileID: 4094556179048296}
   - component: {fileID: 33989253729537806}
   - component: {fileID: 23773885357971478}
-  - component: {fileID: 136175905824320600}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -115,6 +116,29 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1557805959801354}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65436004131837968
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345469369518910}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &114593084048938300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345469369518910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d461b332d7fbb4996d477fdc694463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114685566031350562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,29 +152,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentAIState: 0
   WeaponType: 0
-  IsHuman: 0
+  IsHuman: 1
   AgressionValue: 0
   ActionTimer: 0.1
-  WalkLookAtRange: 50
-  ViewRange: 25
+  WalkLookAtRange: 15
+  ViewRange: 15
   Target: {fileID: 0}
   WalkTarget: {x: 0, y: 0, z: 0}
-  AttackRange: 0.2
+  Agent: {fileID: 195962873664721374}
+  Renderer: {fileID: 23773885357971478}
   HumanColor: {r: 0, g: 0.4620726, b: 1, a: 1}
   ZombieColor: {r: 0, g: 1, b: 0.09055519, a: 1}
---- !u!136 &136175905824320600
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1557805959801354}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &195962873664721374
 NavMeshAgent:
   m_ObjectHideFlags: 1
