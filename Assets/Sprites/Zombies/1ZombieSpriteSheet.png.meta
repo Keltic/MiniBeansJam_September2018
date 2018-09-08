@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 06a15009f67dd0c47bfba1bdc7b6be3c
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: 1ZombieSpriteSheet_0
+    21300002: 1ZombieSpriteSheet_1
+    21300004: 1ZombieSpriteSheet_2
+    21300006: 1ZombieSpriteSheet_3
+    21300008: 1ZombieSpriteSheet_4
+    21300010: 1ZombieSpriteSheet_5
+    21300012: 1ZombieSpriteSheet_6
+    21300014: 1ZombieSpriteSheet_7
+    21300016: 1ZombieSpriteSheet_8
+    21300018: 1ZombieSpriteSheet_9
+    21300020: 1ZombieSpriteSheet_10
+    21300022: 1ZombieSpriteSheet_11
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -45,7 +57,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 36
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
@@ -60,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -71,7 +83,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -82,7 +94,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: iPhone
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -93,7 +105,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -104,11 +116,251 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 108
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5e42f48b56d84846b740d152c9c75a6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 108
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58e8987cd8f81984786df261be280c6a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 108
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 607b1308961082349a3ecfe86362c67c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd0084cfda553854db10d7c74448878b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 72
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ede794cfe3d683c4b9f8a2103b2e864c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 72
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 083eb6198ee9c584d9e888c11f1d4bbf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 36
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffc3ba645adb2bd418d200ff52c3a749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 36
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b367bdaff138e0a4c98399d34cc7b91f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 36
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba37a08f7a8a16643b5b4ba88a3fb368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb580c405ac36d0438a864cfd38d5f06
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 0
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3da0d3c6c4cf24442897267b8616b081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1ZombieSpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 0
+        width: 41.333332
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a69e05243e4ddd46936110265c8a7e4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5fd981383006dc0488bd48cc03598789
     vertices: []
     indices: 
     edges: []
