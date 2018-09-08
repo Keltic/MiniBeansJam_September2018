@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 195943546955474748}
   - component: {fileID: 114336340317726248}
   m_Layer: 0
-  m_Name: Capsule (1)
+  m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   WeaponType: 0
   IsHuman: 1
   AgressionValue: 0
-  ActionTimer: 1
+  ActionTimer: 0.1
   WalkLookAtRange: 15
   ViewRange: 25
   Target: {fileID: 0}
