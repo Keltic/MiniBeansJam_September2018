@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114074926921054472}
   - component: {fileID: 114581365552433182}
   - component: {fileID: 135444193223450956}
+  - component: {fileID: 114555543688602350}
   m_Layer: 0
   m_Name: MainCamera_Game
   m_TagString: MainCamera
@@ -124,6 +125,23 @@ MonoBehaviour:
   maximumZoomValue: 30
   rb: {fileID: 54808093380677384}
   camera: {fileID: 20264653097923230}
+--- !u!114 &114555543688602350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989803472400924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f7c4a7a690d054cafc428061c6d6bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelWidth: 100
+  levelHeight: 100
+  npcStartCount: 100
+  npcPrefab: {fileID: 1345469369518910, guid: f569a3f8a737338498269c8c1ad245f1, type: 2}
+  zombiePrefab: {fileID: 1345469369518910, guid: b7074b62707fd3643a769d652ff5b020,
+    type: 2}
 --- !u!114 &114581365552433182
 MonoBehaviour:
   m_ObjectHideFlags: 1

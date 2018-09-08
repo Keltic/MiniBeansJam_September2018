@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour
 {
@@ -19,7 +20,21 @@ public class InputController : MonoBehaviour
         //LMB Up
         if (Input.GetMouseButtonUp(0))
         {
+            if (!EventSystem.current.IsPointerOverGameObject() && EventSystem.current.currentSelectedGameObject == null)
+            {
+                RaycastHit hitInfo;
+                Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, 500.0f);
 
+                if (hitInfo.collider != null)
+                {
+                    ClickableComponent clickable = hitInfo.collider.gameObject.GetComponent<ClickableComponent>();
+                    if(clickable != null)
+                    {
+                        clickable.OnClick();
+                    }
+                }
+            }
+            
         }
 
         //RMB Down
