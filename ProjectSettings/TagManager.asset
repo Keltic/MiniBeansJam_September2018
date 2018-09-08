@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Grass Background
+    uniqueID: 2885791911
+    locked: 0
+  - name: Level Decoration
+    uniqueID: 438307491
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
