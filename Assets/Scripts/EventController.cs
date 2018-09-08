@@ -10,7 +10,7 @@ public static class EventController
     public delegate void NpcInfectedDelegate();
     public static event NpcInfectedDelegate EventNpcInfected;
 
-    public delegate void ZombieKilledDelegate();
+    public delegate void ZombieKilledDelegate(GameObject zombie);
     public static event ZombieKilledDelegate EventZombieKilled;
 
     public static void ReportNpcSpawned()
@@ -29,11 +29,11 @@ public static class EventController
         }
     }
 
-    public static void ReportZombieKilled()
+    public static void ReportZombieKilled(GameObject zombie)
     {
         if (EventZombieKilled != null)
         {
-            EventZombieKilled();
+            EventZombieKilled(zombie);
         }
     }
 
