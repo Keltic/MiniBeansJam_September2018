@@ -19,7 +19,7 @@ public class AIComponent : MonoBehaviour {
     const float AttackRangeExploder = 3f;
     const float AttackRangeRanged = 15f;
 
-    const float SpeedAttacking = 7.5f;
+    const float SpeedAttacking = 5.5f;
     const float SpeedIdle = 3.5f;
     const float SpeedFleeing = 5.0f;
 
@@ -50,7 +50,7 @@ public class AIComponent : MonoBehaviour {
     // 1 = Aggressive
     public int AgressionValue = 0;
 
-    public float ActionTimer = 1.0f;
+    public float ActionTimer = 0.1f;
 
     // Range to look for random points to walk to
     public float WalkLookAtRange = 50.0f;
@@ -63,12 +63,11 @@ public class AIComponent : MonoBehaviour {
     public GameObject Target = null;
 
     public Vector3 WalkTarget;
-
-    public float AttackRange = 0.2f;
-
+    
     private float CurrentActionTimer = 0.0f;
 
-    private NavMeshAgent agent;
+    public NavMeshAgent Agent;
+    public MeshRenderer Renderer;
 
     public Color HumanColor;
     public Color ZombieColor;
@@ -76,15 +75,28 @@ public class AIComponent : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        agent = GetComponent<NavMeshAgent>();
         otherActors = new List<AIComponent>();
         UpdateAiActors();
         UpdateMaterial();
 	}
 
+    public float GetAttackRange()
+    {
+        switch (WeaponType)
+        {
+            case WeaponTypes.Exploder:
+                return AttackRangeExploder;
+            case WeaponTypes.Meele:
+                return AttackRangeMeele;
+            case WeaponTypes.Ranged:
+                return AttackRangeRanged;
+        }
+        return -1f;
+    }
+
     void UpdateMaterial()
     {
-        Material mat = GetComponent<MeshRenderer>().materials[0];
+        Material mat = Renderer.materials[0];
         mat.color = IsHuman ? HumanColor : ZombieColor;
     }
 	
@@ -151,7 +163,7 @@ public class AIComponent : MonoBehaviour {
     /// </summary>
     void ProcessIdle()
     {
-        agent.speed = SpeedIdle;
+        Agent.speed = SpeedIdle;
         // Passive
         if (AgressionValue == 0)
         {
@@ -210,7 +222,7 @@ public class AIComponent : MonoBehaviour {
 
     void ProcessWalking()
     {
-        if (agent.pathStatus == NavMeshPathStatus.PathComplete)
+        if (Agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
             CurrentAIState = AIState.Idle;
         }
@@ -219,9 +231,8 @@ public class AIComponent : MonoBehaviour {
 
     void ProcessAttacking()
     {
-        agent.speed = SpeedAttacking;
+        Agent.speed = SpeedAttacking;
         float dist = Vector3.Distance(transform.position, Target.transform.position);
-        float walkRangeToTarget = 1.0f;
         AIComponent targetComp = Target.GetComponent<AIComponent>();
 
         // Check if our target is still valid
@@ -244,7 +255,6 @@ public class AIComponent : MonoBehaviour {
                     CurrentAIState = AIState.Idle;
                     return;
                 }
-                walkRangeToTarget = AttackRangeMeele;
                 break;
             case WeaponTypes.Exploder:
                 if (dist < AttackRangeExploder)
@@ -257,7 +267,6 @@ public class AIComponent : MonoBehaviour {
                     CurrentAIState = AIState.Idle;
                     return;
                 }
-                walkRangeToTarget = AttackRangeExploder;
                 break;
             case WeaponTypes.Ranged:
                 if (dist < AttackRangeRanged)
@@ -270,7 +279,6 @@ public class AIComponent : MonoBehaviour {
                     CurrentAIState = AIState.Idle;
                     return;
                 }
-                walkRangeToTarget = AttackRangeRanged;
                 break;
         }
         // Not close enough, chase target
@@ -279,10 +287,9 @@ public class AIComponent : MonoBehaviour {
 
     void ProcessFleeing()
     {
-        agent.speed = SpeedFleeing;
+        Agent.speed = SpeedFleeing;
         Vector3 dir = Target.transform.position - transform.position;
-        Vector3 targetPoint = transform.position - (dir * 5f);
-
+        Vector3 targetPoint = (transform.position - (dir * 5f)) + (Random.insideUnitSphere * 2.5f);
         WalkToTargetPoint(targetPoint);
     }
 
@@ -296,9 +303,9 @@ public class AIComponent : MonoBehaviour {
             CurrentAIState = AIState.Walking;
 
             NavMeshPath path = new NavMeshPath();
-            agent.CalculatePath(WalkTarget, path);        
+            Agent.CalculatePath(WalkTarget, path);
 
-            agent.SetPath(path);
+            Agent.SetPath(path);
         }
 
         // If there is no point on the navmesh to reach the target, this is probably bad..
