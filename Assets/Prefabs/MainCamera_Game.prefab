@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114581365552433182}
   - component: {fileID: 135444193223450956}
   - component: {fileID: 114555543688602350}
+  - component: {fileID: 114961853423912434}
   m_Layer: 0
   m_Name: MainCamera_Game
   m_TagString: MainCamera
@@ -119,10 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0d27a5b884e8449baf7c3d293b93d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollForce: 1
+  scrollForce: 0.5
   zoomForce: 50
-  minimumZoomValue: 5
-  maximumZoomValue: 30
+  minimumZoomValue: 8
+  maximumZoomValue: 20
   rb: {fileID: 54808093380677384}
   camera: {fileID: 20264653097923230}
 --- !u!114 &114555543688602350
@@ -138,10 +139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelWidth: 100
   levelHeight: 100
-  npcStartCount: 100
+  npcStartCount: 200
   npcPrefab: {fileID: 1345469369518910, guid: f569a3f8a737338498269c8c1ad245f1, type: 2}
-  zombiePrefab: {fileID: 1345469369518910, guid: b7074b62707fd3643a769d652ff5b020,
-    type: 2}
 --- !u!114 &114581365552433182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,6 +154,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollingThreshold: 5
   cameraController: {fileID: 114074926921054472}
+--- !u!114 &114961853423912434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989803472400924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd844c00a7002dc489a52bc15924882e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceBgm: {fileID: 0}
+  prefabSourceSfx: {fileID: 82820805184650564, guid: 43821847a44cd6b4dac7572c2d4a2c8d,
+    type: 2}
+  clips:
+  - {fileID: 8300000, guid: 0c7e4ca4098c1cc419a88d8e0e491eef, type: 3}
+  - {fileID: 8300000, guid: d825fb52af9295e4caa36be30d66a02d, type: 3}
+  - {fileID: 8300000, guid: 7797950f95a2d2148a199468e2d34787, type: 3}
+  - {fileID: 8300000, guid: 8d5ddcd30fb96f34ca57971456fd05a8, type: 3}
+  - {fileID: 8300000, guid: 556696c5c60b67140b737f96b523e049, type: 3}
+  - {fileID: 8300000, guid: b05fcb3c4908faf45a7434b7090eae84, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: c0a9acbe0fb0f4d46addaec5f6746bdb, type: 3}
 --- !u!135 &135444193223450956
 SphereCollider:
   m_ObjectHideFlags: 1

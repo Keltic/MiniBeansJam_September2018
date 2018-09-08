@@ -33,6 +33,15 @@ public class InputController : MonoBehaviour
                         clickable.OnClick();
                     }
                 }
+                else
+                {
+                    GameGuiController gui = GameObject.Find("Canvas_Game").GetComponent<GameGuiController>();
+                    if(gui != null)
+                    {
+                        gui.ShowViewRadiusMarker(false);
+                        gui.ShowShootRadiusMarker(false);
+                    }
+                }
             }
             
         }
