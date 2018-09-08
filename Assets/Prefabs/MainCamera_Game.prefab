@@ -119,9 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollForce: 1
-  zoomForce: 300
-  minimumZoomValue: 100
-  maximumZoomValue: 300
+  zoomForce: 50
+  minimumZoomValue: 5
+  maximumZoomValue: 30
   rb: {fileID: 54808093380677384}
   camera: {fileID: 20264653097923230}
 --- !u!114 &114581365552433182

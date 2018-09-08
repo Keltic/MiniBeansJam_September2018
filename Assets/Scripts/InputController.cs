@@ -62,7 +62,7 @@ public class InputController : MonoBehaviour
         //MouseWheel
         if(Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            this.cameraController.Zoom(Input.GetAxis("Mouse ScrollWheel"));
+            this.cameraController.Zoom(Input.GetAxis("Mouse ScrollWheel") * -1);
         }
     }
 }
