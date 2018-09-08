@@ -157,7 +157,9 @@ public class AIComponent : MonoBehaviour {
         UpdateMaterial();
         AgressionValue = 1;
         CurrentAIState = AIState.Idle;
+        EventController.ReportNpcInfected();
     }
+
     /// <summary>
     /// Idle is the go-to state after most actions
     /// </summary>
@@ -312,8 +314,18 @@ public class AIComponent : MonoBehaviour {
     }
 
     void WalkToRandomMapPoint()
-    {
-        Vector3 randomPos = transform.position + (Random.insideUnitSphere * WalkLookAtRange);
+    {   
+        Vector3 randomPos = transform.position;
+
+        float dist = Vector3.Distance(randomPos, transform.position);
+
+        while (dist < WalkLookAtRange * 0.5f)
+        {
+            
+            randomPos =  (Random.insideUnitSphere * WalkLookAtRange);
+            dist = Vector3.Distance(randomPos, transform.position);
+        }
+
         WalkToTargetPoint(randomPos);
     }
 }
