@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 224007627722495612}
   - component: {fileID: 222749728878588670}
   - component: {fileID: 114465793999774716}
-  - component: {fileID: 95899419788621174}
+  - component: {fileID: 95127672610552598}
   m_Layer: 5
   m_Name: PlayerAlert
   m_TagString: Untagged
@@ -307,7 +307,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &95899419788621174
+--- !u!95 &95127672610552598
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -610,7 +610,11 @@ MonoBehaviour:
   textValueZombieCount: {fileID: 114009727981278628}
   textValuePoints: {fileID: 114749344303620286}
   textPlayerAlert: {fileID: 114465793999774716}
-  animatorPlayerAlert: {fileID: 95899419788621174}
+  animatorPlayerAlert: {fileID: 95127672610552598}
+  viewRadiusMarker: {fileID: 0}
+  shootRadiusMarker: {fileID: 0}
+  colorZombieRadius: {r: 1, g: 0.9176218, b: 0, a: 0.39215687}
+  colorNpcRadius: {r: 0, g: 0.5726497, b: 1, a: 0.39215687}
 --- !u!114 &114348490810514080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -689,7 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

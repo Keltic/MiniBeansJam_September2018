@@ -21,6 +21,8 @@ public class ClickableComponent : MonoBehaviour
                 else
                 {
                     //It is a click during normal gameplay
+                    guiController.ShowViewRadiusMarker(true, ai);
+                    guiController.ShowShootRadiusMarker(true, ai);
                 }
             }
         }

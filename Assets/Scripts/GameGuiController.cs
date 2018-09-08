@@ -15,6 +15,14 @@ public class GameGuiController : MonoBehaviour
     private Text textPlayerAlert;
     [SerializeField]
     private Animator animatorPlayerAlert;
+    [SerializeField]
+    private SpriteRenderer viewRadiusMarker;
+    [SerializeField]
+    private SpriteRenderer shootRadiusMarker;
+    [SerializeField]
+    private Color colorZombieRadius;
+    [SerializeField]
+    private Color colorNpcRadius;
 
     private int npcCount = 0;
     private int zombieCount = 0;
@@ -39,6 +47,9 @@ public class GameGuiController : MonoBehaviour
         this.textValuePoints.text = "0";
 
         this.ShowPlayerAlert("Click on a citizen to spawn your first Zombie!", 4);
+
+        this.ShowViewRadiusMarker(false);
+        this.ShowShootRadiusMarker(false);
     }
 
     public void ShowPlayerAlert(string message, float showForSeconds)
@@ -52,6 +63,50 @@ public class GameGuiController : MonoBehaviour
         this.textPlayerAlert.gameObject.SetActive(true);
         this.coroutineTimer = 0;
         this.coroutinePlayerAlert = StartCoroutine(this.CoroutineDisablePlayerAlert(showForSeconds));
+    }
+
+    public void ShowViewRadiusMarker(bool value, AIComponent ai = null)
+    {
+        this.viewRadiusMarker.gameObject.SetActive(value);
+
+        if (value && ai != null)
+        {
+            this.viewRadiusMarker.transform.localScale = new Vector3(ai.ViewRange, ai.ViewRange, 1.0f);
+            this.viewRadiusMarker.transform.parent = ai.transform;
+            this.viewRadiusMarker.transform.localRotation = Quaternion.Euler(90, 0, 0);
+            this.viewRadiusMarker.transform.localPosition = Vector3.zero;
+
+            if (ai.IsHuman)
+            {
+                this.viewRadiusMarker.color = this.colorNpcRadius;
+            }
+            else
+            {
+                this.viewRadiusMarker.color = this.colorZombieRadius;
+            }
+        }
+    }
+
+    public void ShowShootRadiusMarker(bool value, AIComponent ai = null)
+    {
+        this.shootRadiusMarker.gameObject.SetActive(value);
+
+        if (value && ai != null)
+        {
+            this.shootRadiusMarker.transform.localScale = new Vector3(ai.GetAttackRange(), ai.GetAttackRange(), 1.0f);
+            this.shootRadiusMarker.transform.parent = ai.transform;
+            this.shootRadiusMarker.transform.localRotation = Quaternion.Euler(90, 0, 0);
+            this.shootRadiusMarker.transform.localPosition = Vector3.zero;
+
+            if (ai.IsHuman)
+            {
+                this.shootRadiusMarker.color = this.colorNpcRadius;
+            }
+            else
+            {
+                this.shootRadiusMarker.color = this.colorZombieRadius;
+            }
+        }
     }
 
     private void OnNpcSpawned()
