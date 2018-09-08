@@ -66,7 +66,8 @@ public class AIComponent : MonoBehaviour {
     
     private float CurrentActionTimer = 0.0f;
 
-    private NavMeshAgent agent;
+    public NavMeshAgent Agent;
+    public MeshRenderer Renderer;
 
     public Color HumanColor;
     public Color ZombieColor;
@@ -74,7 +75,6 @@ public class AIComponent : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        agent = GetComponent<NavMeshAgent>();
         otherActors = new List<AIComponent>();
         UpdateAiActors();
         UpdateMaterial();
@@ -96,7 +96,7 @@ public class AIComponent : MonoBehaviour {
 
     void UpdateMaterial()
     {
-        Material mat = GetComponent<MeshRenderer>().materials[0];
+        Material mat = Renderer.materials[0];
         mat.color = IsHuman ? HumanColor : ZombieColor;
     }
 	
@@ -163,7 +163,7 @@ public class AIComponent : MonoBehaviour {
     /// </summary>
     void ProcessIdle()
     {
-        agent.speed = SpeedIdle;
+        Agent.speed = SpeedIdle;
         // Passive
         if (AgressionValue == 0)
         {
@@ -222,7 +222,7 @@ public class AIComponent : MonoBehaviour {
 
     void ProcessWalking()
     {
-        if (agent.pathStatus == NavMeshPathStatus.PathComplete)
+        if (Agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
             CurrentAIState = AIState.Idle;
         }
@@ -231,7 +231,7 @@ public class AIComponent : MonoBehaviour {
 
     void ProcessAttacking()
     {
-        agent.speed = SpeedAttacking;
+        Agent.speed = SpeedAttacking;
         float dist = Vector3.Distance(transform.position, Target.transform.position);
         AIComponent targetComp = Target.GetComponent<AIComponent>();
 
@@ -287,7 +287,7 @@ public class AIComponent : MonoBehaviour {
 
     void ProcessFleeing()
     {
-        agent.speed = SpeedFleeing;
+        Agent.speed = SpeedFleeing;
         Vector3 dir = Target.transform.position - transform.position;
         Vector3 targetPoint = (transform.position - (dir * 5f)) + (Random.insideUnitSphere * 2.5f);
         WalkToTargetPoint(targetPoint);
@@ -303,9 +303,9 @@ public class AIComponent : MonoBehaviour {
             CurrentAIState = AIState.Walking;
 
             NavMeshPath path = new NavMeshPath();
-            agent.CalculatePath(WalkTarget, path);        
+            Agent.CalculatePath(WalkTarget, path);
 
-            agent.SetPath(path);
+            Agent.SetPath(path);
         }
 
         // If there is no point on the navmesh to reach the target, this is probably bad..
