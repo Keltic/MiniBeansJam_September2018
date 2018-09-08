@@ -15,11 +15,11 @@ public class AIComponent : MonoBehaviour {
     const int NavhMeshWalkLayer = 0;
 
     // Attack ranges for different weapon types. Maybe move somewhere else
-    const float AttackRangeMeele = 2.5f;
-    const float AttackRangeExploder = 3f;
+    const float AttackRangeMeele = 1.5f;
+    const float AttackRangeExploder = 1.5f;
     const float AttackRangeRanged = 15f;
 
-    const float SpeedAttacking = 5.5f;
+    const float SpeedAttacking = 6f;
     const float SpeedIdle = 3.5f;
     const float SpeedFleeing = 5.0f;
 
@@ -28,7 +28,8 @@ public class AIComponent : MonoBehaviour {
         Idle = 0,
         Walking,
         Fleeing,
-        Attacking
+        Attacking,
+        Dead
     }
 
     public enum WeaponTypes
@@ -78,6 +79,7 @@ public class AIComponent : MonoBehaviour {
         otherActors = new List<AIComponent>();
         UpdateAiActors();
         UpdateMaterial();
+        Agent.autoBraking = false;
 	}
 
     public float GetAttackRange()
@@ -108,8 +110,12 @@ public class AIComponent : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void Update () {
-		if (CurrentActionTimer <= 0.0f)
+	void Update ()
+    {
+
+        Debug.DrawLine(transform.position, WalkTarget, Color.red);
+
+        if (CurrentActionTimer <= 0.0f)
         {
             CurrentActionTimer = ActionTimer;
 
@@ -224,10 +230,42 @@ public class AIComponent : MonoBehaviour {
 
     void ProcessWalking()
     {
-        if (Agent.pathStatus == NavMeshPathStatus.PathComplete)
+        // if we are passive, always check for zombies while
+        // walking
+        if (AgressionValue == 0)
+        {
+            // First, check if there are zombies around and who's the closest
+            GameObject closestZombie = GetClosestEntityOfType(false);
+
+            if (closestZombie != null)
+            {
+                // PANIC !
+                CurrentAIState = AIState.Fleeing;
+                AgressionValue = -1;
+                Target = closestZombie;
+                return;
+            }
+        }
+        // if we are agressive, always check for humans while
+        // walking
+        else if (AgressionValue == 1)
+        {
+            // Check if there is a target to attack
+            GameObject closestVictim = GetClosestEntityOfType(true);
+
+            if (closestVictim != null)
+            {
+                CurrentAIState = AIState.Attacking;
+                Target = closestVictim;
+                return;
+            }
+            // Walk somewhere
+        }
+
+        if (Agent.remainingDistance < 0.5f)
         {
             CurrentAIState = AIState.Idle;
-        }
+        }        
     }
 
 
@@ -249,10 +287,14 @@ public class AIComponent : MonoBehaviour {
             case WeaponTypes.Meele:
                 if (dist < AttackRangeMeele)
                 {
-                    // ATTACK !
                     if (!IsHuman)
                     {
                         targetComp.Infect();
+                    }
+                    else
+                    {
+                        targetComp.CurrentAIState = AIState.Dead;
+                        EventController.ReportZombieKilled(Target);
                     }
                     CurrentAIState = AIState.Idle;
                     return;
@@ -261,10 +303,14 @@ public class AIComponent : MonoBehaviour {
             case WeaponTypes.Exploder:
                 if (dist < AttackRangeExploder)
                 {
-                    // ATTACK !
                     if (!IsHuman)
                     {
                         targetComp.Infect();
+                    }
+                    else
+                    {
+                        targetComp.CurrentAIState = AIState.Dead;
+                        EventController.ReportZombieKilled(Target);
                     }
                     CurrentAIState = AIState.Idle;
                     return;
@@ -273,10 +319,14 @@ public class AIComponent : MonoBehaviour {
             case WeaponTypes.Ranged:
                 if (dist < AttackRangeRanged)
                 {
-                    // ATTACK !
                     if (!IsHuman)
                     {
                         targetComp.Infect();
+                    }
+                    else
+                    {
+                        targetComp.CurrentAIState = AIState.Dead;
+                        EventController.ReportZombieKilled(Target);
                     }
                     CurrentAIState = AIState.Idle;
                     return;
@@ -291,7 +341,7 @@ public class AIComponent : MonoBehaviour {
     {
         Agent.speed = SpeedFleeing;
         Vector3 dir = Target.transform.position - transform.position;
-        Vector3 targetPoint = (transform.position - (dir * 5f)) + (Random.insideUnitSphere * 2.5f);
+        Vector3 targetPoint = (transform.position - ((dir * 5f)) + (Random.insideUnitSphere * 15f));
         WalkToTargetPoint(targetPoint);
     }
 
@@ -320,9 +370,8 @@ public class AIComponent : MonoBehaviour {
         float dist = Vector3.Distance(randomPos, transform.position);
 
         while (dist < WalkLookAtRange * 0.5f)
-        {
-            
-            randomPos =  (Random.insideUnitSphere * WalkLookAtRange);
+        {            
+            randomPos = transform.position + (Random.insideUnitSphere * WalkLookAtRange);
             dist = Vector3.Distance(randomPos, transform.position);
         }
 

@@ -155,8 +155,8 @@ MonoBehaviour:
   IsHuman: 1
   AgressionValue: 0
   ActionTimer: 0.1
-  WalkLookAtRange: 50
-  ViewRange: 25
+  WalkLookAtRange: 15
+  ViewRange: 15
   Target: {fileID: 0}
   WalkTarget: {x: 0, y: 0, z: 0}
   Agent: {fileID: 195962873664721374}
