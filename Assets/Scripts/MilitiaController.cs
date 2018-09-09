@@ -22,6 +22,7 @@ public class MilitiaController : MonoBehaviour {
 	void Start ()
     {
         AllAIActors = new List<AIComponent>();
+        UpdateAiActors();
         spawnController = GetComponent<SpawnController>();    
         EventController.EventNpcSpawned += this.UpdateAiActors;
         EventController.EventZombieKilled += this.ZombieKilled;
