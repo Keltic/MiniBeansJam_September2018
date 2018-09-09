@@ -14,6 +14,7 @@ public class InputController : MonoBehaviour
     private Vector3 cursorPosLastFrame;
     private float cursorPosDifference;
     private Vector3 cursorDragDirection;
+    private bool wasDrag = false;
 
     private void Update()
     {
@@ -33,15 +34,6 @@ public class InputController : MonoBehaviour
                         clickable.OnClick();
                     }
                 }
-                else
-                {
-                    GameGuiController gui = GameObject.Find("Canvas_Game").GetComponent<GameGuiController>();
-                    if(gui != null)
-                    {
-                        gui.ShowViewRadiusMarker(false);
-                        gui.ShowShootRadiusMarker(false);
-                    }
-                }
             }
             
         }
@@ -55,6 +47,17 @@ public class InputController : MonoBehaviour
         //RMB Up
         if (Input.GetMouseButtonUp(1))
         {
+            if (!this.wasDrag)
+            {
+                GameGuiController gui = GameObject.Find("Canvas_Game").GetComponent<GameGuiController>();
+                if (gui != null)
+                {
+                    gui.ShowViewRadiusMarker(false);
+                    gui.ShowShootRadiusMarker(false);
+                }
+            }
+
+            this.wasDrag = false;
             this.checkForDrag = false;
             this.cursorPosThisFrame = Vector3.zero;
             this.cursorPosLastFrame = Vector3.zero;
@@ -70,6 +73,7 @@ public class InputController : MonoBehaviour
 
                 if(this.cursorPosDifference > this.scrollingThreshold)
                 {
+                    this.wasDrag = true;
                     this.cursorDragDirection = this.cursorPosThisFrame - this.cursorPosLastFrame;
                     this.cameraController.Scroll(new Vector3(this.cursorDragDirection.x, this.cursorDragDirection.z, this.cursorDragDirection.y)); //Flip y and z axis because camera is using 3D space.
                 }
