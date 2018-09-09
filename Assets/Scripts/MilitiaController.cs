@@ -102,6 +102,11 @@ public class MilitiaController : MonoBehaviour {
     {
         if (MilitaPrefab)
         {
+            if(this.militiasSpawned == 0)
+            {
+                GameObject.Find("Canvas_Game").GetComponent<GameGuiController>().ShowPlayerAlert("The military has arrived! Watch out!", 4.0f);
+            }
+
             spawnController.SpawnNPC(MilitaPrefab);
             militiasSpawned++;
         }

@@ -21,19 +21,13 @@ public class AudioController : MonoBehaviour
     }
 
     [SerializeField]
-    private AudioSource sourceBgm;
-    [SerializeField]
     private AudioSource prefabSourceSfx;
     [SerializeField]
     private AudioClip[] clips;
 
     public void Start()
     {
-        if (this.sourceBgm != null && !this.sourceBgm.isPlaying)
-        {
-            GameObject.DontDestroyOnLoad(this.sourceBgm.gameObject);
-            this.sourceBgm.Play();
-        }
+        
     }
 
     public void PlaySfx(SfxTypes type, float volume)
