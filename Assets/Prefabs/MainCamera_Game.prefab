@@ -144,6 +144,8 @@ MonoBehaviour:
   MilitaPrefab: {fileID: 1642647042742146, guid: bfd1d92e2f2bfbe439cec993740fcb5c,
     type: 2}
   spawnController: {fileID: 0}
+  ExplosionPrefab: {fileID: 1779058698437588, guid: 312ad06f1d2edab47bfd0979637f6413,
+    type: 2}
   MaxMilitias: 50
 --- !u!114 &114555543688602350
 MonoBehaviour:
