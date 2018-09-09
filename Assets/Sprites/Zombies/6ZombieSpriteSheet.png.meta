@@ -57,7 +57,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 36
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
@@ -121,10 +121,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 108
-        width: 41.333332
-        height: 36
+        width: 29
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +141,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 41
+        x: 48
         y: 108
-        width: 41.333332
-        height: 36
+        width: 29
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,10 +161,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 82
-        y: 108
-        width: 41.333332
-        height: 36
+        x: 94
+        y: 109
+        width: 29
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +181,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 72
-        width: 41.333332
-        height: 36
+        x: 3
+        y: 73
+        width: 28
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_4
       rect:
         serializedVersion: 2
-        x: 41
-        y: 72
-        width: 41.333332
-        height: 36
+        x: 49
+        y: 73
+        width: 28
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,10 +221,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_5
       rect:
         serializedVersion: 2
-        x: 82
-        y: 72
-        width: 41.333332
-        height: 36
+        x: 94
+        y: 73
+        width: 28
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,10 +241,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 36
-        width: 41.333332
-        height: 36
+        x: 2
+        y: 37
+        width: 29
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -261,10 +261,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_7
       rect:
         serializedVersion: 2
-        x: 41
-        y: 36
-        width: 41.333332
-        height: 36
+        x: 48
+        y: 37
+        width: 29
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +281,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_8
       rect:
         serializedVersion: 2
-        x: 82
-        y: 36
-        width: 41.333332
-        height: 36
+        x: 94
+        y: 37
+        width: 29
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,10 +301,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 41.333332
-        height: 36
+        x: 2
+        y: 2
+        width: 28
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -321,10 +321,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_10
       rect:
         serializedVersion: 2
-        x: 41
-        y: 0
-        width: 41.333332
-        height: 36
+        x: 48
+        y: 1
+        width: 28
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,10 +341,10 @@ TextureImporter:
       name: 6ZombieSpriteSheet_11
       rect:
         serializedVersion: 2
-        x: 82
-        y: 0
-        width: 41.333332
-        height: 36
+        x: 94
+        y: 1
+        width: 28
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
