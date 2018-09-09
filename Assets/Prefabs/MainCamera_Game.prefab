@@ -139,12 +139,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllAIActors: []
-  ZombiePercentageTrigger: 0.25
+  ZombiePercentageTrigger: 0.2
   ReactionTimer: 2
   MilitaPrefab: {fileID: 1642647042742146, guid: bfd1d92e2f2bfbe439cec993740fcb5c,
     type: 2}
   spawnController: {fileID: 0}
-  MaxMilitias: 25
+  MaxMilitias: 50
 --- !u!114 &114555543688602350
 MonoBehaviour:
   m_ObjectHideFlags: 1

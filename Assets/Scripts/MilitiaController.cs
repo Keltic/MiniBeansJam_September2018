@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +27,15 @@ public class MilitiaController : MonoBehaviour {
         spawnController = GetComponent<SpawnController>();    
         EventController.EventNpcSpawned += this.UpdateAiActors;
         EventController.EventZombieKilled += this.ZombieKilled;
+        EventController.EventNpcInfected += this.WasInfected;
+    }
+
+    private void WasInfected(GameObject infected, bool isMilitary)
+    {
+        if(isMilitary)
+        {
+            militiasSpawned--;
+        }
     }
 
     private void ZombieKilled(GameObject zombie)

@@ -203,7 +203,7 @@ MonoBehaviour:
   CurrentAIState: 0
   WeaponType: 2
   IsHuman: 1
-  AgressionValue: 10
+  AgressionValue: 1
   ActionTimer: 0.1
   WalkLookAtRange: 15
   ExploderRange: 5
