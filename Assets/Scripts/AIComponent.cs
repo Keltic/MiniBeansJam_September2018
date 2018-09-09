@@ -74,6 +74,7 @@ public class AIComponent : MonoBehaviour {
     public NavMeshAgent Agent;
     public SpriteRenderer Renderer;
     public MilitiaController MilitaController;
+    public Animator Animator;
 
     public RuntimeAnimatorController AnimControllerMeele;
     public RuntimeAnimatorController AnimControllerBomber;
@@ -88,10 +89,10 @@ public class AIComponent : MonoBehaviour {
         Agent.autoBraking = false;
         Renderer = GetComponentInChildren<SpriteRenderer>();
         MilitaController = Camera.allCameras[0].GetComponent<MilitiaController>();
+        Animator = GetComponent<Animator>();
         if (IsHuman && AgressionValue == 0)
         {
-            Animator animator = this.GetComponent<Animator>();
-            animator.runtimeAnimatorController = VillagerSprites[Random.Range(0, 3)];
+            Animator.runtimeAnimatorController = VillagerSprites[Random.Range(0, 3)];
         }
 
     }
@@ -114,8 +115,10 @@ public class AIComponent : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+#if DEBUG
         Debug.DrawLine(transform.position, WalkTarget, Color.red);
-
+#endif
+        UpdateLookDirection();
         if (CurrentActionTimer <= 0.0f)
         {
             CurrentActionTimer = ActionTimer;
@@ -151,7 +154,6 @@ public class AIComponent : MonoBehaviour {
     public void ChangeWeaponType(WeaponTypes newType)
     {
         WeaponType = newType;
-        Animator animator = this.GetComponent<Animator>();
 
         if (!IsHuman)
         {
@@ -160,33 +162,33 @@ public class AIComponent : MonoBehaviour {
                 case WeaponTypes.Exploder:
                     if (AnimControllerBomber)
                     {
-                        animator.runtimeAnimatorController = AnimControllerBomber;
+                        Animator.runtimeAnimatorController = AnimControllerBomber;
                     }
                     SpeedFactor = 1.25f;
                     break;
                 case WeaponTypes.Meele:
                     if (AnimControllerMeele)
                     {
-                        animator.runtimeAnimatorController = AnimControllerMeele;
+                        Animator.runtimeAnimatorController = AnimControllerMeele;
                     }
                     break;
                 case WeaponTypes.Runner:
                     if (AnimControllerRunner)
                     {
-                        animator.runtimeAnimatorController = AnimControllerRunner;
+                        Animator.runtimeAnimatorController = AnimControllerRunner;
                     }
                     SpeedFactor = 2f;
                     break;
                 case WeaponTypes.Trickster:
                     if (AnimControllerTrickster)
                     {
-                        animator.runtimeAnimatorController = AnimControllerTrickster;
+                        Animator.runtimeAnimatorController = AnimControllerTrickster;
                     }
                     break;
                 case WeaponTypes.Ranged:
                     if (AnimControllerRanged)
                     {
-                        animator.runtimeAnimatorController = AnimControllerRanged;
+                        Animator.runtimeAnimatorController = AnimControllerRanged;
                     }
                     break;
             }
@@ -265,8 +267,19 @@ public class AIComponent : MonoBehaviour {
         }
     }
 
-    void ProcessWalking()
+    void UpdateLookDirection()
     {
+        if (Agent.isStopped)
+        {
+            Animator.SetTrigger("Idle");
+            return;
+        }
+        Vector2 src = new Vector2(transform.position.x, transform.position.z);
+        Vector2 target = new Vector2(WalkTarget.x, WalkTarget.z);
+
+    }
+    void ProcessWalking()
+    {        
         // if we are passive, always check for zombies while
         // walking
         if (AgressionValue == 0)
