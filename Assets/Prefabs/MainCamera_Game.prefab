@@ -140,8 +140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllAIActors: []
-  ZombiePercentageTrigger: 0.2
-  ReactionTimer: 2
+  ZombiePercentageTrigger: 0.15
+  ReactionTimer: 2.5
   MilitaPrefab: {fileID: 1642647042742146, guid: bfd1d92e2f2bfbe439cec993740fcb5c,
     type: 2}
   spawnController: {fileID: 0}
@@ -153,7 +153,7 @@ MonoBehaviour:
     type: 2}
   BloodEffect: {fileID: 1413652010561772, guid: 112e96dbb98eeae4b9c5049f85e814df,
     type: 2}
-  MaxMilitias: 50
+  MaxMilitias: 25
 --- !u!114 &114555543688602350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -192,7 +192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd844c00a7002dc489a52bc15924882e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sourceBgm: {fileID: 0}
   prefabSourceSfx: {fileID: 82820805184650564, guid: 43821847a44cd6b4dac7572c2d4a2c8d,
     type: 2}
   clips:
