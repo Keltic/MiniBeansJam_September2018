@@ -42,7 +42,7 @@ public class SpawnController : MonoBehaviour
         if (NavMesh.SamplePosition(spawnPos, out hit, 250.0f, walkMask))
         {
             temp.transform.position = hit.position;
-            EventController.ReportNpcSpawned(temp);
+            EventController.ReportNpcSpawned(temp, temp.GetComponent<AIComponent>().WeaponType == AIComponent.WeaponTypes.Ranged);
         }
         else
         {

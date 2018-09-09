@@ -197,11 +197,11 @@ public class AIComponent : MonoBehaviour {
 
     public void Infect()
     {
+        EventController.ReportNpcInfected(this.gameObject, this.WeaponType == WeaponTypes.Ranged);
         IsHuman = false;
         AgressionValue = 1;
         CurrentAIState = AIState.Idle;
         ChangeWeaponType(WeaponTypes.Meele);
-        EventController.ReportNpcInfected(this.gameObject);
         
     }
 

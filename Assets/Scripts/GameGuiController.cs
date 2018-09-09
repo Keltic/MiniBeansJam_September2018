@@ -181,18 +181,30 @@ public class GameGuiController : MonoBehaviour
         }
     }
 
-    private void OnNpcSpawned(GameObject spawned)
+    private void OnNpcSpawned(GameObject spawned, bool isMilitary)
     {
-        this.villagerCount++;
-        this.textValueVillagerCount.text = this.villagerCount.ToString();
+        AIComponent ai = spawned.GetComponent<AIComponent>();
+        if (ai != null)
+        {
+            if (isMilitary)
+            {
+                this.militaryCount++;
+                this.textValueMilitaryCount.text = this.militaryCount.ToString();
+            }
+            else
+            {
+                this.villagerCount++;
+                this.textValueVillagerCount.text = this.villagerCount.ToString();
+            }
+        }
     }
 
-    private void OnNpcInfected(GameObject infected)
+    private void OnNpcInfected(GameObject infected, bool isMilitary)
     {
         AIComponent ai = infected.GetComponent<AIComponent>();
-        if(ai != null && ai.IsHuman)
+        if(ai != null)
         {
-            if(ai.WeaponType == AIComponent.WeaponTypes.Ranged)
+            if(isMilitary)
             {
                 this.militaryCount--;
                 this.textValueMilitaryCount.text = this.militaryCount.ToString();
