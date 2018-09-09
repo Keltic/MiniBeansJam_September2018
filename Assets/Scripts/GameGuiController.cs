@@ -29,6 +29,10 @@ public class GameGuiController : MonoBehaviour
     private Text textAtMouse;
     [SerializeField]
     private InputController inputController;
+	[SerializeField]
+	private GameObject winPane;
+	[SerializeField]
+	private GameObject loosePane;
 
     private int villagerCount = 0;
     private int militaryCount = 0;
@@ -247,7 +251,7 @@ public class GameGuiController : MonoBehaviour
 
             if (this.villagerCount <= 0 && this.militaryCount <= 0)
             {
-                //TODO: Win condition
+              this.winPane.SetActive(true);
             }
         }
         
@@ -260,7 +264,7 @@ public class GameGuiController : MonoBehaviour
 
         if (this.zombieCount <= 0)
         {
-            //TODO: lose condition
+			this.loosePane.SetActive (true);
         }
     }
 
