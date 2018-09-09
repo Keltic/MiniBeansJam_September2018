@@ -118,6 +118,12 @@ public class AIComponent : MonoBehaviour {
 #if DEBUG
         Debug.DrawLine(transform.position, WalkTarget, Color.red);
 #endif
+        if (CurrentAIState == AIState.Dead)
+        {
+            ProcessDeath();
+            return;
+        }
+
         UpdateLookDirection();
         if (CurrentActionTimer <= 0.0f)
         {
@@ -203,8 +209,14 @@ public class AIComponent : MonoBehaviour {
         CurrentActionTimer = Random.Range(0.75f, 1.5f);
         AgressionValue = 1;
         CurrentAIState = AIState.Idle;
+        GameObject.Instantiate(MilitaController.BloodEffect, transform.position, Quaternion.identity);
         ChangeWeaponType(WeaponTypes.Meele);
-        
+
+    }
+
+    void ProcessDeath()
+    {
+        EventController.ReportZombieKilled(gameObject);
     }
 
     /// <summary>
@@ -464,7 +476,6 @@ public class AIComponent : MonoBehaviour {
                     else
                     {
                         targetComp.CurrentAIState = AIState.Dead;
-                        EventController.ReportZombieKilled(Target);
                     }
                     Target = null;
                     CurrentActionTimer = Random.Range(0.5f, 1.5f);
@@ -489,7 +500,6 @@ public class AIComponent : MonoBehaviour {
                         }
                         GameObject.Instantiate(MilitaController.ExplosionPrefab, transform.position, Quaternion.identity);
                         CurrentAIState = AIState.Dead;
-                        EventController.ReportZombieKilled(gameObject);
                     }
                     else
                     {
@@ -532,6 +542,7 @@ public class AIComponent : MonoBehaviour {
         WalkToTargetPoint(Target.transform.position);
     }
 
+
     public void HitFromProjectile(bool fromHuman)
     {
         if (IsHuman && !fromHuman)
@@ -541,7 +552,6 @@ public class AIComponent : MonoBehaviour {
         else if (fromHuman)
         {
             CurrentAIState = AIState.Dead;
-            EventController.ReportZombieKilled(gameObject);
         }
     }
     void ProcessFleeing()
