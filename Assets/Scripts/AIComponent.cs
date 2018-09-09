@@ -487,6 +487,7 @@ public class AIComponent : MonoBehaviour {
                                 othercomp.Infect();
                             }
                         }
+                        GameObject.Instantiate(MilitaController.ExplosionPrefab, transform.position, Quaternion.identity);
                         CurrentAIState = AIState.Dead;
                         EventController.ReportZombieKilled(gameObject);
                     }

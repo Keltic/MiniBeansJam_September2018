@@ -15,6 +15,8 @@ public class MilitiaController : MonoBehaviour {
 
     public SpawnController spawnController;
 
+    public GameObject ExplosionPrefab;
+
     private float updateTimer;
 
     public float MaxMilitias = 150;
