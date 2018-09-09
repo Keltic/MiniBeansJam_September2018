@@ -33,14 +33,19 @@ public class MilitiaController : MonoBehaviour {
         UpdateAiActors();
     }
 
-    public GameObject GetClosestActor(Vector3 position, float viewRange, bool isHuman)
+    public GameObject GetClosestActor(Vector3 position, float viewRange, bool findHuman)
     {
         GameObject closestEntity = null;
         float closestEntityDist = float.MaxValue;
         foreach (AIComponent others in AllAIActors)
         {
             float dist = Vector3.Distance(position, others.transform.position);
-            if (others.IsHuman == isHuman && dist < viewRange && dist < closestEntityDist)
+            float adjustedViewRange = viewRange;
+            if (!findHuman && others.WeaponType == AIComponent.WeaponTypes.Trickster)
+            {
+                adjustedViewRange *= 0.5f;
+            }
+            if (others.IsHuman == findHuman && dist < viewRange && dist < closestEntityDist)
             {
                 closestEntity = others.gameObject;
                 closestEntityDist = dist;

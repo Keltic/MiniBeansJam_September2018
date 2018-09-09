@@ -38,6 +38,7 @@ public class AIComponent : MonoBehaviour {
         Exploder,
         Ranged,
         Runner,
+        Trickster,
     }
 
 
@@ -62,9 +63,11 @@ public class AIComponent : MonoBehaviour {
 
     public GameObject Target = null;
 
+
     public Vector3 WalkTarget;
     
     private float CurrentActionTimer = 0.0f;
+    private float SpeedFactor = 1.0f;
 
     public NavMeshAgent Agent;
     public SpriteRenderer Renderer;
@@ -148,6 +151,7 @@ public class AIComponent : MonoBehaviour {
                 break;
             case WeaponTypes.Runner:
                 animator.runtimeAnimatorController = AnimControllerRunner;
+                SpeedFactor = 1.5f;
                 break;
         }
     }
@@ -167,7 +171,7 @@ public class AIComponent : MonoBehaviour {
     /// </summary>
     void ProcessIdle()
     {
-        Agent.speed = SpeedIdle;
+        Agent.speed = SpeedIdle * SpeedFactor;
         // Passive
         if (AgressionValue == 0)
         {
@@ -267,7 +271,7 @@ public class AIComponent : MonoBehaviour {
 
     void ProcessAttacking()
     {
-        Agent.speed = SpeedAttacking;
+        Agent.speed = SpeedAttacking * SpeedFactor;
 
         // Check if our target unit is still alive 
         if (Target == null)
@@ -348,7 +352,7 @@ public class AIComponent : MonoBehaviour {
 
     void ProcessFleeing()
     {
-        Agent.speed = SpeedFleeing;
+        Agent.speed = SpeedFleeing * SpeedFactor;
         if (Target == null)
         {
             CurrentAIState = AIState.Idle;
