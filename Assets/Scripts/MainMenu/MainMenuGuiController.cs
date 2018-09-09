@@ -18,10 +18,21 @@ public class MainMenuGuiController : MonoBehaviour
     private WindowHowToPlay windowHowToPlay;
     [SerializeField]
     private WindowCredits windowCredits;
+    [SerializeField]
+    private Text valueVillagerCount;
+    [SerializeField]
+    private Slider sliderVillagerCount;
 
     public void Start()
     {
         this.OnClickButtonBackToMainMenu();
+        this.sliderVillagerCount.value = 200;
+        PlayerPrefs.SetInt("VillagerCount", 200);
+        AudioController audio = Camera.main.GetComponent<AudioController>();
+        if(audio != null)
+        {
+            audio.PlaySfx(AudioController.SfxTypes.Brains1, 0.2f);
+        }
     }
 
     public void ShowWindow(WindowTypes type)
@@ -45,6 +56,13 @@ public class MainMenuGuiController : MonoBehaviour
     public void OnClickButtonBackToMainMenu()
     {
         this.ShowWindow(WindowTypes.MainMenu);
+    }
+
+    public void OnValueChangedVillagerSlider(float value)
+    {
+        value = (int)value;
+        this.valueVillagerCount.text = value.ToString();
+        PlayerPrefs.SetInt("VillagerCount", (int)value);
     }
 
     private void CloseAllWindows()

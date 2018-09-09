@@ -10,8 +10,6 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private float levelHeight;
     [SerializeField]
-    private int npcStartCount;
-    [SerializeField]
     private GameObject npcPrefab;
 
     float leftBorder;
@@ -26,7 +24,9 @@ public class SpawnController : MonoBehaviour
         topBorder = (levelWidth / 2) - 2;
         bottomBorder = topBorder * -1;
 
-        for (int i = 0; i < this.npcStartCount; i++)
+        int count = PlayerPrefs.HasKey("VillagerCount") ? PlayerPrefs.GetInt("VillagerCount") : 200;
+
+        for (int i = 0; i < count; i++)
         {
             SpawnNPC(npcPrefab);
         }
