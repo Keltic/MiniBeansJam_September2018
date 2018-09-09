@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114555543688602350}
   - component: {fileID: 114961853423912434}
   - component: {fileID: 114347726239294844}
-  - component: {fileID: 114401214171590344}
+  - component: {fileID: 114966330468221140}
   m_Layer: 0
   m_Name: MainCamera_Game
   m_TagString: MainCamera
@@ -152,18 +152,6 @@ MonoBehaviour:
   ZombieProjectile: {fileID: 1299701855721866, guid: c5f13a79bafdcaf47b5097a8f4f406ff,
     type: 2}
   MaxMilitias: 50
---- !u!114 &114401214171590344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1989803472400924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e20e9e623ff276c4b9d8705ea73e36cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 0}
 --- !u!114 &114555543688602350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,6 +207,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c0a9acbe0fb0f4d46addaec5f6746bdb, type: 3}
   - {fileID: 8300000, guid: 9b9c11bf634971e4e8312267d8690c5c, type: 3}
   - {fileID: 8300000, guid: b27a771f33b5c5f41bdf565bd5f341f7, type: 3}
+--- !u!114 &114966330468221140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989803472400924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20e9e623ff276c4b9d8705ea73e36cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 0}
 --- !u!135 &135444193223450956
 SphereCollider:
   m_ObjectHideFlags: 1
