@@ -41,6 +41,7 @@ public class GameGuiController : MonoBehaviour
     {
         EventController.EventNpcSpawned += this.OnNpcSpawned;
         EventController.EventNpcInfected += this.OnNpcInfected;
+        EventController.EventZombieKilled += this.OnZombieKilled;
 
         this.textValueNpcCount.text = "0";
         this.textValueZombieCount.text = "0";
@@ -108,7 +109,7 @@ public class GameGuiController : MonoBehaviour
             }
         }
     }
-
+    
     private void OnNpcSpawned()
     {
         this.npcCount++;
@@ -132,7 +133,7 @@ public class GameGuiController : MonoBehaviour
         }
     }
 
-    private void OnZombieKilled()
+    private void OnZombieKilled(GameObject zombie)
     {
         this.zombieCount--;
         this.textValueZombieCount.text = this.zombieCount.ToString();

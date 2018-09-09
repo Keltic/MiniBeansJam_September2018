@@ -31,6 +31,8 @@ public static class EventController
 
     public static void ReportZombieKilled(GameObject zombie)
     {
+        GameObject.DestroyImmediate(zombie);
+
         if (EventZombieKilled != null)
         {
             EventZombieKilled(zombie);

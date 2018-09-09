@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 65436004131837968}
   - component: {fileID: 95104589332087040}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: Militia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,9 +201,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentAIState: 0
-  WeaponType: 0
+  WeaponType: 2
   IsHuman: 1
-  AgressionValue: 0
+  AgressionValue: 1
   ActionTimer: 0.1
   WalkLookAtRange: 15
   ViewRange: 15
@@ -211,6 +211,7 @@ MonoBehaviour:
   WalkTarget: {x: 0, y: 0, z: 0}
   Agent: {fileID: 195962873664721374}
   Renderer: {fileID: 23773885357971478}
+  MilitaController: {fileID: 0}
   AnimControllerBasic: {fileID: 0}
   AnimControllerBomber: {fileID: 0}
   AnimControllerRunner: {fileID: 0}
@@ -282,7 +283,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: 06a15009f67dd0c47bfba1bdc7b6be3c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.28873968, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

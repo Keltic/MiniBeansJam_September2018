@@ -14,20 +14,30 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private GameObject npcPrefab;
 
+    float leftBorder;
+    float rightBorder;
+    float topBorder;
+    float bottomBorder;
+
     public void Start()
     {
-        GameObject temp;
-        float leftBorder = (levelWidth / 2) - 2;
-        float rightBorder = leftBorder * -1;
-        float topBorder = (levelWidth / 2) - 2;
-        float bottomBorder = topBorder * -1;
+        leftBorder = (levelWidth / 2) - 2;
+        rightBorder = leftBorder * -1;
+        topBorder = (levelWidth / 2) - 2;
+        bottomBorder = topBorder * -1;
 
         for (int i = 0; i < this.npcStartCount; i++)
         {
-            temp = GameObject.Instantiate(this.npcPrefab);
-            temp.transform.position = new Vector3(UnityEngine.Random.Range(rightBorder, leftBorder), 0.0f, UnityEngine.Random.Range(bottomBorder, topBorder));
-            EventController.ReportNpcSpawned();
+            SpawnNPC(npcPrefab);
         }
+    }
+
+    public void SpawnNPC(GameObject prefab)
+    {
+        GameObject temp;
+        temp = GameObject.Instantiate(prefab);
+        temp.transform.position = new Vector3(UnityEngine.Random.Range(rightBorder, leftBorder), 0.0f, UnityEngine.Random.Range(bottomBorder, topBorder));
+        EventController.ReportNpcSpawned();
     }
 
 }
