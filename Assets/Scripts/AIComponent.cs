@@ -17,7 +17,7 @@ public class AIComponent : MonoBehaviour {
     // Attack ranges for different weapon types. Maybe move somewhere else
     const float AttackRangeMeele = 1.5f;
     const float AttackRangeExploder = 1.5f;
-    const float AttackRangeRanged = 5f;
+    const float AttackRangeRanged = 3f;
 
     const float SpeedAttacking = 3f;
     const float SpeedIdle = 1.25f;
@@ -413,7 +413,7 @@ public class AIComponent : MonoBehaviour {
     }
 
     void ProcessWalking()
-    {        
+    {
         // if we are passive, always check for zombies while
         // walking
         if (AgressionValue == 0)
