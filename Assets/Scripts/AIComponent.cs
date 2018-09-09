@@ -58,6 +58,8 @@ public class AIComponent : MonoBehaviour {
     // Range to look for random points to walk to
     public float WalkLookAtRange = 50.0f;
 
+    public float ExploderRange = 5.0f;
+
     // Range to look for enemies
     public float ViewRange = 25.0f;
 
@@ -73,9 +75,10 @@ public class AIComponent : MonoBehaviour {
     public SpriteRenderer Renderer;
     public MilitiaController MilitaController;
 
-    public RuntimeAnimatorController AnimControllerBasic;
+    public RuntimeAnimatorController AnimControllerMeele;
     public RuntimeAnimatorController AnimControllerBomber;
     public RuntimeAnimatorController AnimControllerRunner;
+    public RuntimeAnimatorController AnimControllerTrickster;
 
     // Use this for initialization
     void Start () {
@@ -144,14 +147,30 @@ public class AIComponent : MonoBehaviour {
         switch (newType)
         {
             case WeaponTypes.Exploder:
-                animator.runtimeAnimatorController = AnimControllerBomber;
+                if (AnimControllerBomber)
+                {
+                    animator.runtimeAnimatorController = AnimControllerBomber;
+                }
+                SpeedFactor = 1.25f;
                 break;
             case WeaponTypes.Meele:
-                animator.runtimeAnimatorController = AnimControllerBasic;
+                if (AnimControllerMeele)
+                {
+                    animator.runtimeAnimatorController = AnimControllerMeele;
+                }
                 break;
             case WeaponTypes.Runner:
-                animator.runtimeAnimatorController = AnimControllerRunner;
-                SpeedFactor = 1.5f;
+                if (AnimControllerRunner)
+                {
+                    animator.runtimeAnimatorController = AnimControllerRunner;
+                }
+                SpeedFactor = 2f;
+                break;
+            case WeaponTypes.Trickster:
+                if (AnimControllerTrickster)
+                {
+                    animator.runtimeAnimatorController = AnimControllerTrickster;
+                }
                 break;
         }
     }
@@ -315,12 +334,22 @@ public class AIComponent : MonoBehaviour {
                 {
                     if (!IsHuman)
                     {
-                        targetComp.Infect();
+                        List<GameObject> targets = 
+                            MilitaController.GetAllActorsInRange(transform.position, ExploderRange, false);
+                        foreach (GameObject target in targets)
+                        {
+                            AIComponent othercomp = target.GetComponent<AIComponent>();
+                            if (othercomp != null)
+                            {
+                                othercomp.Infect();
+                            }
+                        }
+                        CurrentAIState = AIState.Dead;
+                        EventController.ReportZombieKilled(gameObject);
                     }
                     else
                     {
-                        targetComp.CurrentAIState = AIState.Dead;
-                        EventController.ReportZombieKilled(Target);
+                        // not possible
                     }
                     Target = null;
                     CurrentAIState = AIState.Idle;

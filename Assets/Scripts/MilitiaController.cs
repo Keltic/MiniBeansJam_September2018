@@ -33,6 +33,22 @@ public class MilitiaController : MonoBehaviour {
         UpdateAiActors();
     }
 
+    public List<GameObject> GetAllActorsInRange(Vector3 position, float range, bool findHuman)
+    {
+        List<GameObject> result = new List<GameObject>();
+
+        foreach (AIComponent others in AllAIActors)
+        {
+            float dist = Vector3.Distance(position, others.transform.position);
+
+            if (others.IsHuman == findHuman && dist < range)
+            {
+                result.Add(others.gameObject);
+            }
+        }
+
+        return result;
+    }
     public GameObject GetClosestActor(Vector3 position, float viewRange, bool findHuman)
     {
         GameObject closestEntity = null;
