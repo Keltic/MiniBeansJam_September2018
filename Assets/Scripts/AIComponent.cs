@@ -17,7 +17,7 @@ public class AIComponent : MonoBehaviour {
     // Attack ranges for different weapon types. Maybe move somewhere else
     const float AttackRangeMeele = 1.5f;
     const float AttackRangeExploder = 1.5f;
-    const float AttackRangeRanged = 3f;
+    const float AttackRangeRanged = 4f;
 
     const float SpeedAttacking = 3f;
     const float SpeedIdle = 1.25f;
