@@ -113,54 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: abbdd891b3b2d69429871f81e6f985f5, type: 2}
---- !u!1001 &140866731
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4465143297435110, guid: bfd1d92e2f2bfbe439cec993740fcb5c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465143297435110, guid: bfd1d92e2f2bfbe439cec993740fcb5c, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465143297435110, guid: bfd1d92e2f2bfbe439cec993740fcb5c, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465143297435110, guid: bfd1d92e2f2bfbe439cec993740fcb5c, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465143297435110, guid: bfd1d92e2f2bfbe439cec993740fcb5c, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465143297435110, guid: bfd1d92e2f2bfbe439cec993740fcb5c, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465143297435110, guid: bfd1d92e2f2bfbe439cec993740fcb5c, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465143297435110, guid: bfd1d92e2f2bfbe439cec993740fcb5c, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 212434742552525874, guid: bfd1d92e2f2bfbe439cec993740fcb5c,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300016, guid: 854799c49fc253243b75bcc7053160b3,
-        type: 3}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bfd1d92e2f2bfbe439cec993740fcb5c, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &207653971 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1084970779513144, guid: 05f0b452749990b45821ef1edc83111c,

@@ -25,24 +25,49 @@ public class InputController : MonoBehaviour
     private Vector3 cursorDragDirection;
     private bool wasDrag = false;
     private UpgradeModes currentUpgradeMode = UpgradeModes.None;
+    private GameObject markedCharacter = null;
 
     public void Update()
     {
+        if (!EventSystem.current.IsPointerOverGameObject() && EventSystem.current.currentSelectedGameObject == null)
+        {
+            RaycastHit hitInfo;
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, 500.0f);
+
+            if (hitInfo.collider != null && hitInfo.collider.gameObject != null)
+            {
+                this.ReleaseMarkedCharacter();
+
+                this.markedCharacter = hitInfo.collider.gameObject;
+                Transform child = this.markedCharacter.transform.Find("Sprite");
+                if(child != null)
+                {
+                    SpriteRenderer sr = child.gameObject.GetComponent<SpriteRenderer>();
+                    if(sr != null)
+                    {
+                        sr.color = Color.cyan;
+                    }
+                }
+            }
+            else
+            {
+                this.ReleaseMarkedCharacter();
+            }
+        }
+        else
+        {
+            this.ReleaseMarkedCharacter();
+        }
+
         //LMB Up
         if (Input.GetMouseButtonUp(0))
         {
-            if (!EventSystem.current.IsPointerOverGameObject() && EventSystem.current.currentSelectedGameObject == null)
+            if(this.markedCharacter != null)
             {
-                RaycastHit hitInfo;
-                Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, 500.0f);
-
-                if (hitInfo.collider != null)
+                ClickableComponent clickable = this.markedCharacter.GetComponent<ClickableComponent>();
+                if (clickable != null)
                 {
-                    ClickableComponent clickable = hitInfo.collider.gameObject.GetComponent<ClickableComponent>();
-                    if (clickable != null)
-                    {
-                        clickable.OnClick(this.currentUpgradeMode);
-                    }
+                    clickable.OnClick(this.currentUpgradeMode);
                 }
             }
             
@@ -110,5 +135,23 @@ public class InputController : MonoBehaviour
     public void SwitchToUpgradeMode(UpgradeModes newMode)
     {
         this.currentUpgradeMode = newMode;
+    }
+
+    private void ReleaseMarkedCharacter()
+    {
+        if (this.markedCharacter != null)
+        {
+            Transform child = this.markedCharacter.transform.Find("Sprite");
+            if (child != null)
+            {
+                SpriteRenderer spriteRenderer = child.gameObject.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.color = Color.white;
+                }
+            }
+
+            this.markedCharacter = null;
+        }
     }
 }
