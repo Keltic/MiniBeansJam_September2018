@@ -267,6 +267,7 @@ public class AIComponent : MonoBehaviour {
         }
     }
 
+    private Vector3 lastPos;
     void UpdateLookDirection()
     {
         if (Agent.isStopped)
@@ -275,9 +276,36 @@ public class AIComponent : MonoBehaviour {
             return;
         }
         Vector2 src = new Vector2(transform.position.x, transform.position.z);
-        Vector2 target = new Vector2(WalkTarget.x, WalkTarget.z);
+        Vector2 target = new Vector2(lastPos.x, lastPos.z);
 
+        Vector2 dir = (src - target).normalized;
+        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+        {
+            if (dir.x > 0)
+            {
+                Animator.SetTrigger("WalkRight");
+            }
+            else
+            {
+                Animator.SetTrigger("WalkLeft");
+            }
+        }
+        else
+        {
+            if (dir.y > 0)
+            {
+                Animator.SetTrigger("WalkUp");
+            }
+            else
+            {
+                Animator.SetTrigger("WalkDown");
+            }
+
+        }
+
+        lastPos = transform.position;
     }
+
     void ProcessWalking()
     {        
         // if we are passive, always check for zombies while
