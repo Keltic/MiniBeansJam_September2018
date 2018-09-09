@@ -114,6 +114,10 @@ public class AIComponent : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (otherActors.Count == 0)
+        {
+            UpdateAiActors();
+        }
 
         Debug.DrawLine(transform.position, WalkTarget, Color.red);
 
@@ -147,6 +151,7 @@ public class AIComponent : MonoBehaviour {
     {
         GameObject closestEntity = null;
         float closestEntityDist = float.MaxValue;
+        float viewDist = IsHuman ? ViewRange : ViewRange * 1.2f;
         foreach (AIComponent others in otherActors)
         {
             float dist = Vector3.Distance(transform.position, others.transform.position);
