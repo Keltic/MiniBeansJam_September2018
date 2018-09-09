@@ -19,9 +19,9 @@ public class AIComponent : MonoBehaviour {
     const float AttackRangeExploder = 1.5f;
     const float AttackRangeRanged = 5f;
 
-    const float SpeedAttacking = 6f;
-    const float SpeedIdle = 3.5f;
-    const float SpeedFleeing = 5.0f;
+    const float SpeedAttacking = 3f;
+    const float SpeedIdle = 1.25f;
+    const float SpeedFleeing = 2.5f;
 
     public enum AIState
     {
@@ -326,6 +326,7 @@ public class AIComponent : MonoBehaviour {
             case WeaponTypes.Ranged:
                 if (dist < AttackRangeRanged)
                 {
+                    Agent.isStopped = true;
                     if (!IsHuman)
                     {
                         targetComp.Infect();
@@ -371,6 +372,7 @@ public class AIComponent : MonoBehaviour {
             Agent.CalculatePath(WalkTarget, path);
 
             Agent.SetPath(path);
+            Agent.isStopped = false;
         }
 
         // If there is no point on the navmesh to reach the target, this is probably bad..

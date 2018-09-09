@@ -77,7 +77,6 @@ public class MilitiaController : MonoBehaviour {
             updateTimer = ReactionTimer;
             if (militiasSpawned < MaxMilitias && GetZombiePercentage() > ZombiePercentageTrigger)
             {
-                Debug.Log(GetZombiePercentage() + "% are zombies");
                 SpawnMilitia();
             }
         }
