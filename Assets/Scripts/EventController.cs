@@ -42,7 +42,7 @@ public static class EventController
             }
         }
 
-        GameObject.Destroy(zombie);
+        GameObject.DestroyImmediate(zombie);
 
         if (EventZombieKilled != null)
         {

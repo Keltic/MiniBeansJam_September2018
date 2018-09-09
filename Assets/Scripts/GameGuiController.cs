@@ -191,6 +191,20 @@ public class GameGuiController : MonoBehaviour
         }
     }
 
+    public bool SubtractPoints(int amount)
+    {
+        int newCount = this.pointsCount - amount;
+
+        if(newCount >= 0)
+        {
+            this.pointsCount = newCount;
+            this.textValuePoints.text = this.pointsCount.ToString();
+            return true;
+        }
+
+        return false;
+    }
+
     private void OnNpcSpawned(GameObject spawned, bool isMilitary)
     {
         AIComponent ai = spawned.GetComponent<AIComponent>();

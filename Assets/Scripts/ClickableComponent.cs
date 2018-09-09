@@ -11,40 +11,47 @@ public class ClickableComponent : MonoBehaviour
         {
             //It is an NPC or a Zombie
             GameGuiController guiController = GameObject.Find("Canvas_Game").GetComponent<GameGuiController>();
-            if(guiController != null)
+            AudioController audio = Camera.main.GetComponent<AudioController>();
+            if (guiController != null && audio != null)
             {
                 if(guiController.ZombieCount == 0)
                 {
                     //This is the click for the initial zombie spawn
                     ai.Infect();
+                    audio.PlayRandomMoan(0.5f);
                 }
                 else
                 {
                     //It is a click during normal gameplay
+
                     switch (mode)
                     {
                         case InputController.UpgradeModes.Bomber:
-                            if (!ai.IsHuman)
+                            if (!ai.IsHuman && guiController.SubtractPoints(5))
                             {
                                 ai.ChangeWeaponType(AIComponent.WeaponTypes.Exploder);
+                                audio.PlayRandomMoan(0.5f);
                             }
                             break;
                         case InputController.UpgradeModes.Runner:
-                            if (!ai.IsHuman)
+                            if (!ai.IsHuman && guiController.SubtractPoints(10))
                             {
                                 ai.ChangeWeaponType(AIComponent.WeaponTypes.Runner);
+                                audio.PlayRandomMoan(0.5f);
                             }
                             break;
                         case InputController.UpgradeModes.Shooter:
-                            if (!ai.IsHuman)
+                            if (!ai.IsHuman && guiController.SubtractPoints(15))
                             {
                                 ai.ChangeWeaponType(AIComponent.WeaponTypes.Ranged);
+                                audio.PlayRandomMoan(0.5f);
                             }
                             break;
                         case InputController.UpgradeModes.Trickster:
-                            if (!ai.IsHuman)
+                            if (!ai.IsHuman && guiController.SubtractPoints(5))
                             {
                                 ai.ChangeWeaponType(AIComponent.WeaponTypes.Trickster);
+                                audio.PlayRandomMoan(0.5f);
                             }
                             break;
                         default:
