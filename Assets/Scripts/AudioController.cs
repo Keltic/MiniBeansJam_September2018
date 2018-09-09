@@ -13,8 +13,11 @@ public class AudioController : MonoBehaviour
         Moan2,
         Moan3,
         Shot,
-        NpcInfected,
-        FreshMeat
+        NpcInfectedMale,
+        NpcInfectedFemale,
+        FreshMeat,
+        Spit,
+        DeathZombie
     }
 
     [SerializeField]
@@ -60,11 +63,20 @@ public class AudioController : MonoBehaviour
             case SfxTypes.Shot:
                 source.clip = this.clips[6];
                 break;
-            case SfxTypes.NpcInfected:
+            case SfxTypes.NpcInfectedMale:
                 source.clip = this.clips[7];
                 break;
-            case SfxTypes.FreshMeat:
+            case SfxTypes.NpcInfectedFemale:
                 source.clip = this.clips[8];
+                break;
+            case SfxTypes.FreshMeat:
+                source.clip = this.clips[9];
+                break;
+            case SfxTypes.Spit:
+                source.clip = this.clips[10];
+                break;
+            case SfxTypes.DeathZombie:
+                source.clip = this.clips[11];
                 break;
         }
 

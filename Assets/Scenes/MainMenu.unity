@@ -33264,12 +33264,32 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114014578316672538, guid: 8ce6a7faa466cbf4fa2ba4cc9f553e8b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1330203172}
+    - target: {fileID: 114695336263202848, guid: 8ce6a7faa466cbf4fa2ba4cc9f553e8b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1330203172}
+    - target: {fileID: 114227191134356424, guid: 8ce6a7faa466cbf4fa2ba4cc9f553e8b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1330203172}
+    - target: {fileID: 114446448850079012, guid: 8ce6a7faa466cbf4fa2ba4cc9f553e8b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1330203172}
     - target: {fileID: 114298412319475928, guid: 8ce6a7faa466cbf4fa2ba4cc9f553e8b,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1330203172}
-    - target: {fileID: 114014578316672538, guid: 8ce6a7faa466cbf4fa2ba4cc9f553e8b,
+    - target: {fileID: 114077617240571550, guid: 8ce6a7faa466cbf4fa2ba4cc9f553e8b,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -34072,9 +34092,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8d5ddcd30fb96f34ca57971456fd05a8, type: 3}
   - {fileID: 8300000, guid: 556696c5c60b67140b737f96b523e049, type: 3}
   - {fileID: 8300000, guid: b05fcb3c4908faf45a7434b7090eae84, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 578eb62bc9bba05489785a6a77112f8f, type: 3}
+  - {fileID: 8300000, guid: 8dd93204d3d55714bbb0adc510eead53, type: 3}
+  - {fileID: 8300000, guid: 9724b9b4618260941b72f9d4ccfbdbdf, type: 3}
   - {fileID: 8300000, guid: c0a9acbe0fb0f4d46addaec5f6746bdb, type: 3}
+  - {fileID: 8300000, guid: 9b9c11bf634971e4e8312267d8690c5c, type: 3}
+  - {fileID: 8300000, guid: b27a771f33b5c5f41bdf565bd5f341f7, type: 3}
 --- !u!1 &1330522199
 GameObject:
   m_ObjectHideFlags: 0
