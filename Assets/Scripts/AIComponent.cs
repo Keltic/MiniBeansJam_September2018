@@ -58,7 +58,7 @@ public class AIComponent : MonoBehaviour {
     // Range to look for random points to walk to
     public float WalkLookAtRange = 50.0f;
 
-    public float ExploderRange = 5.0f;
+    public float ExploderRange = 2f;
 
     // Range to look for enemies
     public float ViewRange = 25.0f;
@@ -147,8 +147,7 @@ public class AIComponent : MonoBehaviour {
 
     GameObject GetClosestEnemy()
     {
-        float viewDist = IsHuman ? ViewRange : ViewRange * 1.2f;
-        return MilitaController.GetClosestActor(transform.position, viewDist, !IsHuman);
+        return MilitaController.GetClosestActor(transform.position, ViewRange, !IsHuman);
     }
 
     public void ChangeWeaponType(WeaponTypes newType)
@@ -164,7 +163,7 @@ public class AIComponent : MonoBehaviour {
                     {
                         Animator.runtimeAnimatorController = AnimControllerBomber;
                     }
-                    SpeedFactor = 1.25f;
+                    SpeedFactor = 0.95f;
                     break;
                 case WeaponTypes.Meele:
                     if (AnimControllerMeele)
@@ -199,6 +198,9 @@ public class AIComponent : MonoBehaviour {
     {
         EventController.ReportNpcInfected(this.gameObject, this.WeaponType == WeaponTypes.Ranged);
         IsHuman = false;
+        Agent.isStopped = true;
+        WalkTarget = transform.position;
+        CurrentActionTimer = Random.Range(0.75f, 1.5f);
         AgressionValue = 1;
         CurrentAIState = AIState.Idle;
         ChangeWeaponType(WeaponTypes.Meele);
@@ -268,11 +270,30 @@ public class AIComponent : MonoBehaviour {
     }
 
     private Vector3 lastPos;
+    int lastDir = 0;
+    int matchFrames = 0;
+
+    const int minMatches = 5;
     void UpdateLookDirection()
     {
         if (Agent.isStopped)
         {
-            Animator.SetTrigger("Idle");
+            if (lastDir == 4)
+            {
+                if (matchFrames < minMatches)
+                {
+                    matchFrames++;
+                }
+                else
+                {
+                    Animator.SetTrigger("Idle");
+                }
+            }
+            else
+            {
+                matchFrames = 0;
+                lastDir = 4;
+            }
             return;
         }
         Vector2 src = new Vector2(transform.position.x, transform.position.z);
@@ -283,22 +304,82 @@ public class AIComponent : MonoBehaviour {
         {
             if (dir.x > 0)
             {
-                Animator.SetTrigger("WalkRight");
+                if (lastDir == 0)
+                {
+                    if (matchFrames < minMatches)
+                    {
+                        matchFrames++;
+                    }
+                    else
+                    {
+                        Animator.SetTrigger("WalkRight");
+                    }
+                }
+                else
+                {
+                    matchFrames = 0;
+                    lastDir = 0;
+                }
             }
             else
             {
-                Animator.SetTrigger("WalkLeft");
+                if (lastDir == 1)
+                {
+                    if (matchFrames < minMatches)
+                    {
+                        matchFrames++;
+                    }
+                    else
+                    {
+                        Animator.SetTrigger("WalkLeft");
+                    }
+                }
+                else
+                {
+                    matchFrames = 0;
+                    lastDir = 1;
+                }
             }
         }
         else
         {
             if (dir.y > 0)
             {
-                Animator.SetTrigger("WalkUp");
+                if (lastDir == 2)
+                {
+                    if (matchFrames < minMatches)
+                    {
+                        matchFrames++;
+                    }
+                    else
+                    {
+                        Animator.SetTrigger("WalkUp");
+                    }
+                }
+                else
+                {
+                    matchFrames = 0;
+                    lastDir = 2;
+                }
             }
             else
             {
-                Animator.SetTrigger("WalkDown");
+                if (lastDir == 3)
+                {
+                    if (matchFrames < minMatches)
+                    {
+                        matchFrames++;
+                    }
+                    else
+                    {
+                        Animator.SetTrigger("WalkDown");
+                    }
+                }
+                else
+                {
+                    matchFrames = 0;
+                    lastDir = 3;
+                }
             }
 
         }
@@ -372,6 +453,8 @@ public class AIComponent : MonoBehaviour {
         switch (WeaponType)
         {
             case WeaponTypes.Meele:
+            case WeaponTypes.Runner:
+            case WeaponTypes.Trickster:
                 if (dist < AttackRangeMeele)
                 {
                     if (!IsHuman)
@@ -384,6 +467,7 @@ public class AIComponent : MonoBehaviour {
                         EventController.ReportZombieKilled(Target);
                     }
                     Target = null;
+                    CurrentActionTimer = Random.Range(0.5f, 1.5f);
                     CurrentAIState = AIState.Idle;
                     return;
                 }
@@ -394,7 +478,7 @@ public class AIComponent : MonoBehaviour {
                     if (!IsHuman)
                     {
                         List<GameObject> targets = 
-                            MilitaController.GetAllActorsInRange(transform.position, ExploderRange, false);
+                            MilitaController.GetAllActorsInRange(transform.position, ExploderRange, true);
                         foreach (GameObject target in targets)
                         {
                             AIComponent othercomp = target.GetComponent<AIComponent>();
@@ -428,6 +512,7 @@ public class AIComponent : MonoBehaviour {
                         targetComp.CurrentAIState = AIState.Dead;
                         EventController.ReportZombieKilled(Target);
                     }
+                    CurrentActionTimer = Random.Range(0.5f, 1.5f);
                     Target = null;
                     CurrentAIState = AIState.Idle;
                     return;

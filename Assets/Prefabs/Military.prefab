@@ -169,7 +169,7 @@ Animator:
   m_GameObject: {fileID: 1642647042742146}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 290d8041ae0ab7742b6aa6580d7c68be, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9b9315bd89c082449a45988b4190072f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -213,6 +213,7 @@ MonoBehaviour:
   Agent: {fileID: 195563206541173802}
   Renderer: {fileID: 23600621523775506}
   MilitaController: {fileID: 0}
+  Animator: {fileID: 0}
   AnimControllerMeele: {fileID: 9100000, guid: 290d8041ae0ab7742b6aa6580d7c68be, type: 2}
   AnimControllerBomber: {fileID: 9100000, guid: 17d05c0d805f72744957c6653860e983,
     type: 2}
