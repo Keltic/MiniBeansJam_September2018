@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,7 +17,7 @@ public class AIComponent : MonoBehaviour {
     // Attack ranges for different weapon types. Maybe move somewhere else
     const float AttackRangeMeele = 1.5f;
     const float AttackRangeExploder = 1.5f;
-    const float AttackRangeRanged = 15f;
+    const float AttackRangeRanged = 5f;
 
     const float SpeedAttacking = 6f;
     const float SpeedIdle = 3.5f;
@@ -37,6 +37,7 @@ public class AIComponent : MonoBehaviour {
         Meele,
         Exploder,
         Ranged,
+        Runner,
     }
 
 
@@ -59,8 +60,6 @@ public class AIComponent : MonoBehaviour {
     // Range to look for enemies
     public float ViewRange = 25.0f;
 
-    private List<AIComponent> otherActors;
-
     public GameObject Target = null;
 
     public Vector3 WalkTarget;
@@ -68,20 +67,19 @@ public class AIComponent : MonoBehaviour {
     private float CurrentActionTimer = 0.0f;
 
     public NavMeshAgent Agent;
-    public MeshRenderer Renderer;
+    public SpriteRenderer Renderer;
+    public MilitiaController MilitaController;
 
-    public Color HumanColor;
-    public Color ZombieColor;
+    public RuntimeAnimatorController AnimControllerBasic;
+    public RuntimeAnimatorController AnimControllerBomber;
+    public RuntimeAnimatorController AnimControllerRunner;
 
-
-	// Use this for initialization
-	void Start () {
-        otherActors = new List<AIComponent>();
-        UpdateAiActors();
-        UpdateMaterial();
+    // Use this for initialization
+    void Start () {
         Agent.autoBraking = false;
-	}
-
+        Renderer = GetComponentInChildren<SpriteRenderer>();
+        MilitaController = Camera.allCameras[0].GetComponent<MilitiaController>();
+    }
     
     public float GetAttackRange()
     {
@@ -98,27 +96,9 @@ public class AIComponent : MonoBehaviour {
     }
     
 
-    void UpdateMaterial()
-    {
-        Material mat = Renderer.materials[0];
-        mat.color = IsHuman ? HumanColor : ZombieColor;
-    }
-	
-    void UpdateAiActors()
-    {
-        otherActors.AddRange(FindObjectsOfType<AIComponent>());
-        // ignore self
-        otherActors.RemoveAll(actor => actor.gameObject == this.gameObject);
-    }
-
 	// Update is called once per frame
 	void Update ()
     {
-        if (otherActors.Count == 0)
-        {
-            UpdateAiActors();
-        }
-
         Debug.DrawLine(transform.position, WalkTarget, Color.red);
 
         if (CurrentActionTimer <= 0.0f)
@@ -147,36 +127,39 @@ public class AIComponent : MonoBehaviour {
         }
 	}
 
-    GameObject GetClosestEntityOfType(bool human)
+    GameObject GetClosestEnemy()
     {
-        GameObject closestEntity = null;
-        float closestEntityDist = float.MaxValue;
         float viewDist = IsHuman ? ViewRange : ViewRange * 1.2f;
-        foreach (AIComponent others in otherActors)
-        {
-            float dist = Vector3.Distance(transform.position, others.transform.position);
-            if (others.IsHuman == human && dist < ViewRange && dist < closestEntityDist)
-            {
-                closestEntity = others.gameObject;
-                closestEntityDist = dist;
-            }
-        }
-        return closestEntity;
+        return MilitaController.GetClosestActor(transform.position, viewDist, !IsHuman);
     }
 
     public void ChangeWeaponType(WeaponTypes newType)
     {
         WeaponType = newType;
-        // TODO: Change animator
+        Animator animator = this.GetComponent<Animator>();
+        
+        switch (newType)
+        {
+            case WeaponTypes.Exploder:
+                animator.runtimeAnimatorController = AnimControllerBomber;
+                break;
+            case WeaponTypes.Meele:
+                animator.runtimeAnimatorController = AnimControllerBasic;
+                break;
+            case WeaponTypes.Runner:
+                animator.runtimeAnimatorController = AnimControllerRunner;
+                break;
+        }
     }
 
     public void Infect()
     {
         IsHuman = false;
-        UpdateMaterial();
         AgressionValue = 1;
         CurrentAIState = AIState.Idle;
+        WeaponType = WeaponTypes.Meele;
         EventController.ReportNpcInfected();
+        Renderer.color = Color.red;
     }
 
     /// <summary>
@@ -189,7 +172,7 @@ public class AIComponent : MonoBehaviour {
         if (AgressionValue == 0)
         {
             // First, check if there are zombies around and who's the closest
-            GameObject closestZombie = GetClosestEntityOfType(false);
+            GameObject closestZombie = GetClosestEnemy();
 
             if (closestZombie != null)
             {
@@ -204,7 +187,7 @@ public class AIComponent : MonoBehaviour {
         else if (AgressionValue == -1)
         {
              // Check if there is still a zombie close
-            GameObject closestZombie = GetClosestEntityOfType(false);
+            GameObject closestZombie = GetClosestEnemy();
 
             if (closestZombie != null)
             {
@@ -223,7 +206,7 @@ public class AIComponent : MonoBehaviour {
         else if (AgressionValue == 1)
         {
             // Check if there is a target to attack
-            GameObject closestVictim = GetClosestEntityOfType(true);
+            GameObject closestVictim = GetClosestEnemy();
 
             if (closestVictim != null)
             {
@@ -248,7 +231,7 @@ public class AIComponent : MonoBehaviour {
         if (AgressionValue == 0)
         {
             // First, check if there are zombies around and who's the closest
-            GameObject closestZombie = GetClosestEntityOfType(false);
+            GameObject closestZombie = GetClosestEnemy();
 
             if (closestZombie != null)
             {
@@ -264,7 +247,7 @@ public class AIComponent : MonoBehaviour {
         else if (AgressionValue == 1)
         {
             // Check if there is a target to attack
-            GameObject closestVictim = GetClosestEntityOfType(true);
+            GameObject closestVictim = GetClosestEnemy();
 
             if (closestVictim != null)
             {
@@ -285,11 +268,20 @@ public class AIComponent : MonoBehaviour {
     void ProcessAttacking()
     {
         Agent.speed = SpeedAttacking;
+
+        // Check if our target unit is still alive 
+        if (Target == null)
+        {
+            CurrentAIState = AIState.Idle;
+            return;
+        }
+
         float dist = Vector3.Distance(transform.position, Target.transform.position);
+
         AIComponent targetComp = Target.GetComponent<AIComponent>();
 
         // Check if our target is still valid
-        if (targetComp.IsHuman == IsHuman)
+        if (targetComp == null || targetComp.IsHuman == IsHuman)
         {
             CurrentAIState = AIState.Idle;
             return;
@@ -309,6 +301,7 @@ public class AIComponent : MonoBehaviour {
                         targetComp.CurrentAIState = AIState.Dead;
                         EventController.ReportZombieKilled(Target);
                     }
+                    Target = null;
                     CurrentAIState = AIState.Idle;
                     return;
                 }
@@ -325,6 +318,7 @@ public class AIComponent : MonoBehaviour {
                         targetComp.CurrentAIState = AIState.Dead;
                         EventController.ReportZombieKilled(Target);
                     }
+                    Target = null;
                     CurrentAIState = AIState.Idle;
                     return;
                 }
@@ -341,6 +335,7 @@ public class AIComponent : MonoBehaviour {
                         targetComp.CurrentAIState = AIState.Dead;
                         EventController.ReportZombieKilled(Target);
                     }
+                    Target = null;
                     CurrentAIState = AIState.Idle;
                     return;
                 }
@@ -353,8 +348,13 @@ public class AIComponent : MonoBehaviour {
     void ProcessFleeing()
     {
         Agent.speed = SpeedFleeing;
+        if (Target == null)
+        {
+            CurrentAIState = AIState.Idle;
+            return;
+        }
         Vector3 dir = Target.transform.position - transform.position;
-        Vector3 targetPoint = (transform.position - ((dir * 5f)) + (Random.insideUnitSphere * 15f));
+        Vector3 targetPoint = (transform.position - ((dir * 2.5f)) + (Random.insideUnitSphere * 2.5f));
         WalkToTargetPoint(targetPoint);
     }
 
