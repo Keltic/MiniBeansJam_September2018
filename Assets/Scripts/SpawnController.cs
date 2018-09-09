@@ -36,8 +36,18 @@ public class SpawnController : MonoBehaviour
     {
         GameObject temp;
         temp = GameObject.Instantiate(prefab);
-        temp.transform.position = new Vector3(UnityEngine.Random.Range(rightBorder, leftBorder), 0.0f, UnityEngine.Random.Range(bottomBorder, topBorder));
-        EventController.ReportNpcSpawned();
+        Vector3 spawnPos = new Vector3(UnityEngine.Random.Range(rightBorder, leftBorder), 0.0f, UnityEngine.Random.Range(bottomBorder, topBorder));
+        NavMeshHit hit;
+        int walkMask = 1 << NavMesh.GetAreaFromName("Walkable");
+        if (NavMesh.SamplePosition(spawnPos, out hit, 250.0f, walkMask))
+        {
+            temp.transform.position = hit.position;
+            EventController.ReportNpcSpawned();
+        }
+        else
+        {
+            DestroyImmediate(temp);
+        }
     }
 
 }
