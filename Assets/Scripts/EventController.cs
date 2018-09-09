@@ -31,7 +31,18 @@ public static class EventController
 
     public static void ReportZombieKilled(GameObject zombie)
     {
-        GameObject.DestroyImmediate(zombie);
+        GameGuiController gui = GameObject.Find("Canvas_Game").GetComponent<GameGuiController>();
+
+        if(gui != null)
+        {
+            if(zombie.transform == gui.RadiusMarkerParent)
+            {
+                gui.ShowViewRadiusMarker(false);
+                gui.ShowShootRadiusMarker(false);
+            }
+        }
+
+        GameObject.Destroy(zombie);
 
         if (EventZombieKilled != null)
         {

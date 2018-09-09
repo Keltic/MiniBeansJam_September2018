@@ -94,6 +94,11 @@ public class GameGuiController : MonoBehaviour
 
     public void ShowViewRadiusMarker(bool value, AIComponent ai = null)
     {
+        if(this.viewRadiusMarker == null)
+        {
+            return;
+        }
+
         this.viewRadiusMarker.gameObject.SetActive(value);
 
         if (value && ai != null)
@@ -120,6 +125,11 @@ public class GameGuiController : MonoBehaviour
 
     public void ShowShootRadiusMarker(bool value, AIComponent ai = null)
     {
+        if (this.shootRadiusMarker == null)
+        {
+            return;
+        }
+
         this.shootRadiusMarker.gameObject.SetActive(value);
 
         if (value && ai != null)
