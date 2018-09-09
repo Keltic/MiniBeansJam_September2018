@@ -193,6 +193,7 @@ public class GameGuiController : MonoBehaviour
 
     public bool SubtractPoints(int amount)
     {
+        return true;
         int newCount = this.pointsCount - amount;
 
         if(newCount >= 0)

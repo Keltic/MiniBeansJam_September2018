@@ -16,6 +16,8 @@ public class MilitiaController : MonoBehaviour {
     public SpawnController spawnController;
 
     public GameObject ExplosionPrefab;
+    public GameObject MilitaryProjectile;
+    public GameObject ZombieProjectile;
 
     private float updateTimer;
 

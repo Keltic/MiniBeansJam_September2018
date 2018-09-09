@@ -501,18 +501,26 @@ public class AIComponent : MonoBehaviour {
                 }
                 break;
             case WeaponTypes.Ranged:
-                if (dist < AttackRangeRanged)
+                float range = IsHuman ? AttackRangeRanged : AttackRangeRanged * 0.5f;
+                if (dist < range)
                 {
-                    Agent.isStopped = true;
                     if (!IsHuman)
                     {
-                        targetComp.Infect();
+                        GameObject projectile = GameObject.Instantiate(MilitaController.ZombieProjectile, transform.position, Quaternion.AngleAxis(90, Vector3.right));
+                        MoveProjectile mover = projectile.GetComponent<MoveProjectile>();
+                        mover.TargetComponent = targetComp;
+                        mover.IsHumanProjectile = IsHuman;
+                        mover.Target = Target.transform.position;
                     }
                     else
                     {
-                        targetComp.CurrentAIState = AIState.Dead;
-                        EventController.ReportZombieKilled(Target);
+                        GameObject projectile = GameObject.Instantiate(MilitaController.MilitaryProjectile, transform.position, Quaternion.identity);
+                        MoveProjectile mover = projectile.GetComponent<MoveProjectile>();
+                        mover.TargetComponent = targetComp;
+                        mover.IsHumanProjectile = IsHuman;
+                        mover.Target = Target.transform.position;
                     }
+                    Agent.isStopped = true;
                     CurrentActionTimer = Random.Range(0.5f, 1.5f);
                     Target = null;
                     CurrentAIState = AIState.Idle;
@@ -524,6 +532,18 @@ public class AIComponent : MonoBehaviour {
         WalkToTargetPoint(Target.transform.position);
     }
 
+    public void HitFromProjectile(bool fromHuman)
+    {
+        if (IsHuman && !fromHuman)
+        {
+            Infect();
+        }
+        else if (fromHuman)
+        {
+            CurrentAIState = AIState.Dead;
+            EventController.ReportZombieKilled(gameObject);
+        }
+    }
     void ProcessFleeing()
     {
         Agent.speed = SpeedFleeing * SpeedFactor;

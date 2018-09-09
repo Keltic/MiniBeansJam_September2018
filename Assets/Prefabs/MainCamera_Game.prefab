@@ -146,6 +146,10 @@ MonoBehaviour:
   spawnController: {fileID: 0}
   ExplosionPrefab: {fileID: 1779058698437588, guid: 312ad06f1d2edab47bfd0979637f6413,
     type: 2}
+  MilitaryProjectile: {fileID: 1846731668650372, guid: 989ba7854204a5b44a7c7db51dd17e63,
+    type: 2}
+  ZombieProjectile: {fileID: 1299701855721866, guid: c5f13a79bafdcaf47b5097a8f4f406ff,
+    type: 2}
   MaxMilitias: 50
 --- !u!114 &114555543688602350
 MonoBehaviour:
