@@ -5,6 +5,15 @@ using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour
 {
+    public enum UpgradeModes
+    {
+        None,
+        Runner,
+        Shooter,
+        Bomber,
+        Trickster
+    }
+
     [SerializeField]
     private float scrollingThreshold;
     [SerializeField]
@@ -15,8 +24,9 @@ public class InputController : MonoBehaviour
     private float cursorPosDifference;
     private Vector3 cursorDragDirection;
     private bool wasDrag = false;
+    private UpgradeModes currentUpgradeMode = UpgradeModes.None;
 
-    private void Update()
+    public void Update()
     {
         //LMB Up
         if (Input.GetMouseButtonUp(0))
@@ -29,9 +39,9 @@ public class InputController : MonoBehaviour
                 if (hitInfo.collider != null)
                 {
                     ClickableComponent clickable = hitInfo.collider.gameObject.GetComponent<ClickableComponent>();
-                    if(clickable != null)
+                    if (clickable != null)
                     {
-                        clickable.OnClick();
+                        clickable.OnClick(this.currentUpgradeMode);
                     }
                 }
             }
@@ -54,7 +64,10 @@ public class InputController : MonoBehaviour
                 {
                     gui.ShowViewRadiusMarker(false);
                     gui.ShowShootRadiusMarker(false);
+                    gui.ShowTextAtMouse(false);
                 }
+
+                this.SwitchToUpgradeMode(UpgradeModes.None);
             }
 
             this.wasDrag = false;
@@ -92,5 +105,10 @@ public class InputController : MonoBehaviour
         {
             this.cameraController.Zoom(Input.GetAxis("Mouse ScrollWheel") * -1);
         }
+    }
+
+    public void SwitchToUpgradeMode(UpgradeModes newMode)
+    {
+        this.currentUpgradeMode = newMode;
     }
 }

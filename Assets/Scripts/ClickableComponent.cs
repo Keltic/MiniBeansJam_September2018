@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClickableComponent : MonoBehaviour
 {
-    public void OnClick()
+    public void OnClick(InputController.UpgradeModes mode)
     {
         AIComponent ai = this.GetComponent<AIComponent>();
         if(ai != null)
@@ -21,8 +21,37 @@ public class ClickableComponent : MonoBehaviour
                 else
                 {
                     //It is a click during normal gameplay
-                    guiController.ShowViewRadiusMarker(true, ai);
-                    guiController.ShowShootRadiusMarker(true, ai);
+                    switch (mode)
+                    {
+                        case InputController.UpgradeModes.Bomber:
+                            if (!ai.IsHuman)
+                            {
+                                ai.ChangeWeaponType(AIComponent.WeaponTypes.Exploder);
+                            }
+                            break;
+                        case InputController.UpgradeModes.Runner:
+                            if (!ai.IsHuman)
+                            {
+                                ai.ChangeWeaponType(AIComponent.WeaponTypes.Runner);
+                            }
+                            break;
+                        case InputController.UpgradeModes.Shooter:
+                            if (!ai.IsHuman)
+                            {
+                                ai.ChangeWeaponType(AIComponent.WeaponTypes.Ranged);
+                            }
+                            break;
+                        case InputController.UpgradeModes.Trickster:
+                            if (!ai.IsHuman)
+                            {
+                                ai.ChangeWeaponType(AIComponent.WeaponTypes.Trickster);
+                            }
+                            break;
+                        default:
+                            guiController.ShowViewRadiusMarker(true, ai);
+                            guiController.ShowShootRadiusMarker(true, ai);
+                            break;
+                    }
                 }
             }
         }

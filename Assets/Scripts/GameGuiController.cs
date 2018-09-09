@@ -23,6 +23,10 @@ public class GameGuiController : MonoBehaviour
     private Color colorZombieRadius;
     [SerializeField]
     private Color colorNpcRadius;
+    [SerializeField]
+    private Text textAtMouse;
+    [SerializeField]
+    private InputController inputController;
 
     private int npcCount = 0;
     private int zombieCount = 0;
@@ -35,6 +39,7 @@ public class GameGuiController : MonoBehaviour
     public int NpcCount { get { return this.npcCount; } }
     public int ZombieCount { get { return this.zombieCount; } }
     public int PointsCount { get { return this.pointsCount; } }
+    public Transform RadiusMarkerParent { get { return this.viewRadiusMarker.transform.parent; } }
 
 
     public void Awake()
@@ -51,11 +56,27 @@ public class GameGuiController : MonoBehaviour
 
         this.ShowViewRadiusMarker(false);
         this.ShowShootRadiusMarker(false);
+        this.ShowTextAtMouse(false);
+    }
+
+    public void Update()
+    {
+        this.textAtMouse.transform.position = Input.mousePosition;
+    }
+
+    public void ShowTextAtMouse(bool value, string message = "")
+    {
+        this.textAtMouse.gameObject.SetActive(value);
+
+        if (value)
+        {
+            this.textAtMouse.text = message;
+        }
     }
 
     public void ShowPlayerAlert(string message, float showForSeconds)
     {
-        if(this.coroutinePlayerAlert != null)
+        if (this.coroutinePlayerAlert != null)
         {
             StopCoroutine(this.coroutinePlayerAlert);
         }
@@ -68,10 +89,6 @@ public class GameGuiController : MonoBehaviour
 
     public void ShowViewRadiusMarker(bool value, AIComponent ai = null)
     {
-        if (this.viewRadiusMarker == null || this.viewRadiusMarker.gameObject == null)
-        {
-            return;
-        }
         this.viewRadiusMarker.gameObject.SetActive(value);
 
         if (value && ai != null)
@@ -90,14 +107,14 @@ public class GameGuiController : MonoBehaviour
                 this.viewRadiusMarker.color = this.colorZombieRadius;
             }
         }
+        else
+        {
+            this.viewRadiusMarker.transform.SetParent(null);
+        }
     }
 
     public void ShowShootRadiusMarker(bool value, AIComponent ai = null)
     {
-        if (this.shootRadiusMarker == null || this.shootRadiusMarker.gameObject == null)
-        {
-            return;
-        }
         this.shootRadiusMarker.gameObject.SetActive(value);
 
         if (value && ai != null)
@@ -116,8 +133,49 @@ public class GameGuiController : MonoBehaviour
                 this.shootRadiusMarker.color = this.colorZombieRadius;
             }
         }
+        else
+        {
+            this.shootRadiusMarker.transform.SetParent(null);
+        }
     }
-    
+
+    public void OnClickButtonUpgradeToRunner()
+    {
+        if (this.zombieCount > 0)
+        {
+            this.ShowTextAtMouse(true, "Upgrade to Runner\nFlesh: 10");
+            this.inputController.SwitchToUpgradeMode(InputController.UpgradeModes.Runner);
+
+        }
+    }
+
+    public void OnClickButtonUpgradeToShooter()
+    {
+        if (this.zombieCount > 0)
+        {
+            this.ShowTextAtMouse(true, "Upgrade to Shooter\nFlesh: 15");
+            this.inputController.SwitchToUpgradeMode(InputController.UpgradeModes.Shooter);
+        }
+    }
+
+    public void OnClickButtonUpgradeToBomber()
+    {
+        if (this.zombieCount > 0)
+        {
+            this.ShowTextAtMouse(true, "Upgrade to Bomber\nFlesh: 5");
+            this.inputController.SwitchToUpgradeMode(InputController.UpgradeModes.Bomber);
+        }
+    }
+
+    public void OnClickButtonUpgradeToTrickster()
+    {
+        if (this.zombieCount > 0)
+        {
+            this.ShowTextAtMouse(true, "Upgrade to Trickster\nFlesh: 5");
+            this.inputController.SwitchToUpgradeMode(InputController.UpgradeModes.Trickster);
+        }
+    }
+
     private void OnNpcSpawned()
     {
         this.npcCount++;
@@ -146,7 +204,7 @@ public class GameGuiController : MonoBehaviour
         this.zombieCount--;
         this.textValueZombieCount.text = this.zombieCount.ToString();
 
-        if(this.zombieCount <= 0)
+        if (this.zombieCount <= 0)
         {
             //TODO: lose condition
         }
@@ -155,11 +213,11 @@ public class GameGuiController : MonoBehaviour
     private IEnumerator CoroutineDisablePlayerAlert(float secondsUntilDisable)
     {
         this.alertFadeOutRunning = false;
-        while(this.coroutineTimer < secondsUntilDisable)
+        while (this.coroutineTimer < secondsUntilDisable)
         {
             this.coroutineTimer += Time.deltaTime;
 
-            if(!this.alertFadeOutRunning && this.coroutineTimer > secondsUntilDisable - 1)
+            if (!this.alertFadeOutRunning && this.coroutineTimer > secondsUntilDisable - 1)
             {
                 this.alertFadeOutRunning = true;
                 this.animatorPlayerAlert.SetTrigger("FadeOut");

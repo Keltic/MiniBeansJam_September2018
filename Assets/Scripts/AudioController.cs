@@ -76,4 +76,20 @@ public class AudioController : MonoBehaviour
     {
         this.PlaySfx(SfxTypes.ButtonClick, 1.0f);
     }
+
+    public void PlayRandomMoan()
+    {
+        switch (UnityEngine.Random.Range(0, 3))
+        {
+            case 0:
+                this.PlaySfx(SfxTypes.Moan1, 1.0f);
+                break;
+            case 1:
+                this.PlaySfx(SfxTypes.Moan2, 1.0f);
+                break;
+            case 2:
+                this.PlaySfx(SfxTypes.Moan3, 1.0f);
+                break;
+        }
+    }
 }
