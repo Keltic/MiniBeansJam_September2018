@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -201,7 +201,7 @@ public class AIComponent : MonoBehaviour {
         AgressionValue = 1;
         CurrentAIState = AIState.Idle;
         ChangeWeaponType(WeaponTypes.Meele);
-        EventController.ReportNpcInfected();
+        EventController.ReportNpcInfected(this.gameObject);
         
     }
 

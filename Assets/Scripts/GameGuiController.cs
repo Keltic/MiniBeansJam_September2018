@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class GameGuiController : MonoBehaviour
 {
     [SerializeField]
-    private Text textValueNpcCount;
+    private Text textValueVillagerCount;
+    [SerializeField]
+    private Text textValueMilitaryCount;
     [SerializeField]
     private Text textValueZombieCount;
     [SerializeField]
@@ -28,7 +30,8 @@ public class GameGuiController : MonoBehaviour
     [SerializeField]
     private InputController inputController;
 
-    private int npcCount = 0;
+    private int villagerCount = 0;
+    private int militaryCount = 0;
     private int zombieCount = 0;
     private int pointsCount = 0;
 
@@ -36,7 +39,8 @@ public class GameGuiController : MonoBehaviour
     private float coroutineTimer = 0;
     private bool alertFadeOutRunning = false;
 
-    public int NpcCount { get { return this.npcCount; } }
+    public int VillagerCount { get { return this.villagerCount; } }
+    public int MilitaryCount { get { return this.militaryCount; } }
     public int ZombieCount { get { return this.zombieCount; } }
     public int PointsCount { get { return this.pointsCount; } }
     public Transform RadiusMarkerParent { get { return this.viewRadiusMarker.transform.parent; } }
@@ -48,7 +52,8 @@ public class GameGuiController : MonoBehaviour
         EventController.EventNpcInfected += this.OnNpcInfected;
         EventController.EventZombieKilled += this.OnZombieKilled;
 
-        this.textValueNpcCount.text = "0";
+        this.textValueVillagerCount.text = "0";
+        this.textValueMilitaryCount.text = "0";
         this.textValueZombieCount.text = "0";
         this.textValuePoints.text = "0";
 
@@ -176,27 +181,40 @@ public class GameGuiController : MonoBehaviour
         }
     }
 
-    private void OnNpcSpawned()
+    private void OnNpcSpawned(GameObject spawned)
     {
-        this.npcCount++;
-        this.textValueNpcCount.text = this.npcCount.ToString();
+        this.villagerCount++;
+        this.textValueVillagerCount.text = this.villagerCount.ToString();
     }
 
-    private void OnNpcInfected()
+    private void OnNpcInfected(GameObject infected)
     {
-        this.npcCount--;
-        this.textValueNpcCount.text = this.npcCount.ToString();
-
-        this.zombieCount++;
-        this.textValueZombieCount.text = this.zombieCount.ToString();
-
-        this.pointsCount++;
-        this.textValuePoints.text = this.pointsCount.ToString();
-
-        if (this.npcCount <= 0)
+        AIComponent ai = infected.GetComponent<AIComponent>();
+        if(ai != null && ai.IsHuman)
         {
-            //TODO: Win condition
+            if(ai.WeaponType == AIComponent.WeaponTypes.Ranged)
+            {
+                this.militaryCount--;
+                this.textValueMilitaryCount.text = this.militaryCount.ToString();
+            }
+            else
+            {
+                this.villagerCount--;
+                this.textValueVillagerCount.text = this.villagerCount.ToString();
+            }
+
+            this.zombieCount++;
+            this.textValueZombieCount.text = this.zombieCount.ToString();
+
+            this.pointsCount++;
+            this.textValuePoints.text = this.pointsCount.ToString();
+
+            if (this.villagerCount <= 0 && this.militaryCount <= 0)
+            {
+                //TODO: Win condition
+            }
         }
+        
     }
 
     private void OnZombieKilled(GameObject zombie)

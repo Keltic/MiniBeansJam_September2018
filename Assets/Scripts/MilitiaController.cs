@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ public class MilitiaController : MonoBehaviour {
 	void Start ()
     {
         AllAIActors = new List<AIComponent>();
-        UpdateAiActors();
+        UpdateAiActors(null);
         spawnController = GetComponent<SpawnController>();    
         EventController.EventNpcSpawned += this.UpdateAiActors;
         EventController.EventZombieKilled += this.ZombieKilled;
@@ -30,7 +30,7 @@ public class MilitiaController : MonoBehaviour {
 
     private void ZombieKilled(GameObject zombie)
     {
-        UpdateAiActors();
+        UpdateAiActors(null);
     }
 
     public List<GameObject> GetAllActorsInRange(Vector3 position, float range, bool findHuman)
@@ -70,7 +70,7 @@ public class MilitiaController : MonoBehaviour {
         return closestEntity;
     }
 
-    void UpdateAiActors()
+    void UpdateAiActors(GameObject spawned)
     {
         AllAIActors.Clear();
         AllAIActors.AddRange(FindObjectsOfType<AIComponent>());
