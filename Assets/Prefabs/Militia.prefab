@@ -206,15 +206,23 @@ MonoBehaviour:
   AgressionValue: 1
   ActionTimer: 0.1
   WalkLookAtRange: 15
+  ExploderRange: 5
   ViewRange: 15
   Target: {fileID: 0}
   WalkTarget: {x: 0, y: 0, z: 0}
   Agent: {fileID: 195962873664721374}
   Renderer: {fileID: 23773885357971478}
   MilitaController: {fileID: 0}
-  AnimControllerBasic: {fileID: 0}
-  AnimControllerBomber: {fileID: 0}
-  AnimControllerRunner: {fileID: 0}
+  AnimControllerMeele: {fileID: 9100000, guid: 290d8041ae0ab7742b6aa6580d7c68be, type: 2}
+  AnimControllerBomber: {fileID: 9100000, guid: 17d05c0d805f72744957c6653860e983,
+    type: 2}
+  AnimControllerRunner: {fileID: 9100000, guid: 81f278f149176c34dbe99142abf31aba,
+    type: 2}
+  AnimControllerTrickster: {fileID: 9100000, guid: 1432d5dfd2dc2974aa49237a4e9601de,
+    type: 2}
+  AnimControllerRanged: {fileID: 9100000, guid: cd4a8e64afe9e7e46af0cecec18455db,
+    type: 2}
+  VillagerSprites: []
 --- !u!114 &114787316057998802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,7 +291,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: 06a15009f67dd0c47bfba1bdc7b6be3c, type: 3}
-  m_Color: {r: 0, g: 0.28873968, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

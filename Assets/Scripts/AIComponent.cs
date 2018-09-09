@@ -79,12 +79,21 @@ public class AIComponent : MonoBehaviour {
     public RuntimeAnimatorController AnimControllerBomber;
     public RuntimeAnimatorController AnimControllerRunner;
     public RuntimeAnimatorController AnimControllerTrickster;
+    public RuntimeAnimatorController AnimControllerRanged;
+
+    public RuntimeAnimatorController[] VillagerSprites;
 
     // Use this for initialization
     void Start () {
         Agent.autoBraking = false;
         Renderer = GetComponentInChildren<SpriteRenderer>();
         MilitaController = Camera.allCameras[0].GetComponent<MilitiaController>();
+        if (IsHuman && AgressionValue == 0)
+        {
+            Animator animator = this.GetComponent<Animator>();
+            animator.runtimeAnimatorController = VillagerSprites[Random.Range(0, 3)];
+        }
+
     }
     
     public float GetAttackRange()
@@ -143,35 +152,44 @@ public class AIComponent : MonoBehaviour {
     {
         WeaponType = newType;
         Animator animator = this.GetComponent<Animator>();
-        
-        switch (newType)
+
+        if (!IsHuman)
         {
-            case WeaponTypes.Exploder:
-                if (AnimControllerBomber)
-                {
-                    animator.runtimeAnimatorController = AnimControllerBomber;
-                }
-                SpeedFactor = 1.25f;
-                break;
-            case WeaponTypes.Meele:
-                if (AnimControllerMeele)
-                {
-                    animator.runtimeAnimatorController = AnimControllerMeele;
-                }
-                break;
-            case WeaponTypes.Runner:
-                if (AnimControllerRunner)
-                {
-                    animator.runtimeAnimatorController = AnimControllerRunner;
-                }
-                SpeedFactor = 2f;
-                break;
-            case WeaponTypes.Trickster:
-                if (AnimControllerTrickster)
-                {
-                    animator.runtimeAnimatorController = AnimControllerTrickster;
-                }
-                break;
+            switch (newType)
+            {
+                case WeaponTypes.Exploder:
+                    if (AnimControllerBomber)
+                    {
+                        animator.runtimeAnimatorController = AnimControllerBomber;
+                    }
+                    SpeedFactor = 1.25f;
+                    break;
+                case WeaponTypes.Meele:
+                    if (AnimControllerMeele)
+                    {
+                        animator.runtimeAnimatorController = AnimControllerMeele;
+                    }
+                    break;
+                case WeaponTypes.Runner:
+                    if (AnimControllerRunner)
+                    {
+                        animator.runtimeAnimatorController = AnimControllerRunner;
+                    }
+                    SpeedFactor = 2f;
+                    break;
+                case WeaponTypes.Trickster:
+                    if (AnimControllerTrickster)
+                    {
+                        animator.runtimeAnimatorController = AnimControllerTrickster;
+                    }
+                    break;
+                case WeaponTypes.Ranged:
+                    if (AnimControllerRanged)
+                    {
+                        animator.runtimeAnimatorController = AnimControllerRanged;
+                    }
+                    break;
+            }
         }
     }
 
@@ -180,9 +198,9 @@ public class AIComponent : MonoBehaviour {
         IsHuman = false;
         AgressionValue = 1;
         CurrentAIState = AIState.Idle;
-        WeaponType = WeaponTypes.Meele;
+        ChangeWeaponType(WeaponTypes.Meele);
         EventController.ReportNpcInfected();
-        Renderer.color = Color.red;
+        
     }
 
     /// <summary>

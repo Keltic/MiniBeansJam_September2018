@@ -141,7 +141,7 @@ MonoBehaviour:
   AllAIActors: []
   ZombiePercentageTrigger: 0.25
   ReactionTimer: 2
-  MilitaPrefab: {fileID: 1345469369518910, guid: 8edcf5ecd68628e4e974505e2af1e838,
+  MilitaPrefab: {fileID: 1642647042742146, guid: bfd1d92e2f2bfbe439cec993740fcb5c,
     type: 2}
   spawnController: {fileID: 0}
   MaxMilitias: 25
