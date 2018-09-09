@@ -167,7 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelWidth: 100
   levelHeight: 100
-  npcStartCount: 200
   npcPrefab: {fileID: 1345469369518910, guid: f569a3f8a737338498269c8c1ad245f1, type: 2}
 --- !u!114 &114581365552433182
 MonoBehaviour:
@@ -203,12 +202,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8d5ddcd30fb96f34ca57971456fd05a8, type: 3}
   - {fileID: 8300000, guid: 556696c5c60b67140b737f96b523e049, type: 3}
   - {fileID: 8300000, guid: b05fcb3c4908faf45a7434b7090eae84, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 578eb62bc9bba05489785a6a77112f8f, type: 3}
+  - {fileID: 8300000, guid: 8dd93204d3d55714bbb0adc510eead53, type: 3}
+  - {fileID: 8300000, guid: 9724b9b4618260941b72f9d4ccfbdbdf, type: 3}
   - {fileID: 8300000, guid: c0a9acbe0fb0f4d46addaec5f6746bdb, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 9b9c11bf634971e4e8312267d8690c5c, type: 3}
+  - {fileID: 8300000, guid: b27a771f33b5c5f41bdf565bd5f341f7, type: 3}
 --- !u!114 &114966330468221140
 MonoBehaviour:
   m_ObjectHideFlags: 1

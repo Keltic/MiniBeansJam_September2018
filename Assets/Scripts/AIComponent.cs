@@ -71,6 +71,8 @@ public class AIComponent : MonoBehaviour {
     private float CurrentActionTimer = 0.0f;
     private float SpeedFactor = 1.0f;
 
+    private AudioController audioController;
+
     public NavMeshAgent Agent;
     public SpriteRenderer Renderer;
     public MilitiaController MilitaController;
@@ -86,6 +88,7 @@ public class AIComponent : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        this.audioController = GameObject.Find("MainCamera_Game").GetComponent<AudioController>();
         Agent.autoBraking = false;
         Renderer = GetComponentInChildren<SpriteRenderer>();
         MilitaController = Camera.allCameras[0].GetComponent<MilitiaController>();
@@ -203,6 +206,15 @@ public class AIComponent : MonoBehaviour {
     public void Infect()
     {
         EventController.ReportNpcInfected(this.gameObject, this.WeaponType == WeaponTypes.Ranged);
+        if(this.Animator.runtimeAnimatorController.name == "AnimatorControllerVillager2" || this.Animator.runtimeAnimatorController.name == "AnimatorControllerVillager3")
+        {
+            this.audioController.PlaySfx(AudioController.SfxTypes.NpcInfectedFemale, 0.2f);
+        }
+        else
+        {
+            this.audioController.PlaySfx(AudioController.SfxTypes.NpcInfectedMale, 0.2f);
+        }
+
         IsHuman = false;
         Agent.isStopped = true;
         WalkTarget = transform.position;
@@ -216,6 +228,7 @@ public class AIComponent : MonoBehaviour {
 
     void ProcessDeath()
     {
+        this.audioController.PlaySfx(AudioController.SfxTypes.DeathZombie, 0.2f);
         EventController.ReportZombieKilled(gameObject);
     }
 
@@ -516,6 +529,7 @@ public class AIComponent : MonoBehaviour {
                 {
                     if (!IsHuman)
                     {
+                        this.audioController.PlaySfx(AudioController.SfxTypes.Spit, 0.2f);
                         GameObject projectile = GameObject.Instantiate(MilitaController.ZombieProjectile, transform.position, Quaternion.AngleAxis(90, Vector3.right));
                         MoveProjectile mover = projectile.GetComponent<MoveProjectile>();
                         mover.TargetComponent = targetComp;
@@ -524,6 +538,7 @@ public class AIComponent : MonoBehaviour {
                     }
                     else
                     {
+                        this.audioController.PlaySfx(AudioController.SfxTypes.Shot, 0.2f);
                         GameObject projectile = GameObject.Instantiate(MilitaController.MilitaryProjectile, transform.position, Quaternion.identity);
                         MoveProjectile mover = projectile.GetComponent<MoveProjectile>();
                         mover.TargetComponent = targetComp;
