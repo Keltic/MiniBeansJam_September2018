@@ -19,6 +19,8 @@ public class MilitiaController : MonoBehaviour {
     public GameObject MilitaryProjectile;
     public GameObject ZombieProjectile;
 
+    public GameObject BloodEffect;
+
     private float updateTimer;
 
     public float MaxMilitias = 150;
